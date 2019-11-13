@@ -4,7 +4,7 @@ import Container from './effects/Container';
 function App() {
   return (
     <Container>
-      {people =>
+      {({ people }) =>
         people.map((person, index) => (
           <button data-testid="person" key={index}></button>
         ))

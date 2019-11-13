@@ -2,7 +2,6 @@ import App from './App';
 import { makeServer } from '../server';
 import { render, waitForDomChange } from '@testing-library/react';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 describe('weather station', () => {
   let server;
