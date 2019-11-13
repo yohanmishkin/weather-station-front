@@ -28,6 +28,9 @@ export function makeServer({ environment = 'development' } = {}) {
       this.timing = 0;
 
       this.get('/people', ({ db }) => db.people);
+      this.get('/people/:id', ({ db }, request) =>
+        db.people.find(request.params.id)
+      );
     }
   });
 

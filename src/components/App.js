@@ -1,4 +1,5 @@
-import Container from './effects/Container';
+import PeopleContainer from './effects/PeopleContainer';
+import PersonContainer from './effects/PersonContainer';
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ function App() {
     <Switch>
       <Route exact path="/">
         <h1>Weather station</h1>
-        <Container>
+        <PeopleContainer>
           {({ people }) =>
             people.map((person, index) => (
               <Link to={`/people/${person.id}`} key={index} className="card">
@@ -16,11 +17,15 @@ function App() {
               </Link>
             ))
           }
-        </Container>
+        </PeopleContainer>
       </Route>
 
       <Route path="/people/:id">
-        <h1>hi</h1>
+        {({ match }) => (
+          <PersonContainer id={match.params.id}>
+            {({ person }) => <h1>{person.name}</h1>}
+          </PersonContainer>
+        )}
       </Route>
     </Switch>
   );

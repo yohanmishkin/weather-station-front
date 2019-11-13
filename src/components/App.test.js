@@ -3,7 +3,7 @@ import { makeServer } from '../server';
 import { fireEvent, render, waitForDomChange } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter, Router } from 'react-router-dom';
 
 describe('weather station', () => {
   let server;
@@ -37,7 +37,7 @@ describe('weather station', () => {
     expect(getByText(`${personC.temperature}`));
   });
 
-  it('displays the forecast for a person', async () => {
+  it(`can navigate to a person's page`, async () => {
     let person = server.create('person');
 
     const history = createMemoryHistory();
@@ -52,5 +52,19 @@ describe('weather station', () => {
     fireEvent.click(getByText(person.name));
 
     expect(history.location.pathname).toBe(`/people/${person.id}`);
+  });
+
+  it('displays the forecast for a person', async () => {
+    let person = server.create('person');
+
+    const { getByText } = render(
+      <MemoryRouter initialEntries={[`/people/${person.id}`]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    await waitForDomChange();
+
+    expect(getByText(person.name)).toBeDefined();
   });
 });
