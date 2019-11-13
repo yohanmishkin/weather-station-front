@@ -1,4 +1,4 @@
-import { Server, Model } from 'miragejs';
+import { Server, Factory, Model } from 'miragejs';
 
 export function makeServer({ environment = 'development' } = {}) {
   const server = new Server({
@@ -9,14 +9,11 @@ export function makeServer({ environment = 'development' } = {}) {
     },
 
     factories: {
-      // listing: Factory.extend({
-      //   description() {
-      //     return 'qwers';
-      //   },
-      //   remote() {
-      //     return Math.random() >= 0.5;
-      //   },
-      // }),
+      person: Factory.extend({
+        name(i) {
+          return `Mrs. ${i}`;
+        }
+      })
     },
 
     seeds(/*server*/) {},

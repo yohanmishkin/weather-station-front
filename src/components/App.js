@@ -6,7 +6,9 @@ function App() {
     <Container>
       {({ people }) =>
         people.map((person, index) => (
-          <button data-testid="person" key={index}></button>
+          <button data-testid={`person-${person.id}`} key={index}>
+            {person.name}
+          </button>
         ))
       }
     </Container>

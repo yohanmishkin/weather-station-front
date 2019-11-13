@@ -15,13 +15,15 @@ describe('weather station', () => {
   });
 
   it('displays the weather for multiple people', async () => {
-    server.createList('person', 3);
+    let [personA, personB, personC] = server.createList('person', 3);
 
-    const { getAllByTestId } = render(<App />);
+    const { getByText } = render(<App />);
 
     await waitForDomChange();
 
-    expect(getAllByTestId('person').length).toBe(3);
+    expect(getByText(personA.name));
+    expect(getByText(personB.name));
+    expect(getByText(personC.name));
   });
 
   it.skip('displays the forecast for a person', () => {});
