@@ -5,7 +5,7 @@ export function makeServer({ environment = 'development' } = {}) {
     environment,
 
     models: {
-      person: Model,
+      person: Model
     },
 
     factories: {
@@ -19,15 +19,14 @@ export function makeServer({ environment = 'development' } = {}) {
       // }),
     },
 
-    seeds(/*server*/) {
-    },
+    seeds(/*server*/) {},
 
     routes() {
-      // this.namespace = 'api';
+      this.namespace = 'api';
       // this.timing = 400;
 
-      // this.get('/listings', ({ db }) => db.listings);
-    },
+      this.get('/people', ({ db }) => db.people);
+    }
   });
 
   return server;

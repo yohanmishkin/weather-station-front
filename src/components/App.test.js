@@ -1,6 +1,6 @@
 import App from './App';
-import { makeServer } from './server';
-import { render } from '@testing-library/react';
+import { makeServer } from '../server';
+import { render, waitForDomChange } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -15,10 +15,12 @@ describe('weather station', () => {
     server.shutdown();
   });
 
-  it('displays the weather for multiple people', () => {
+  it('displays the weather for multiple people', async () => {
     server.createList('person', 3);
 
     const { getAllByTestId } = render(<App />);
+
+    await waitForDomChange();
 
     expect(getAllByTestId('person').length).toBe(3);
   });
