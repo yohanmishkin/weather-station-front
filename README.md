@@ -1,11 +1,12 @@
 - display current weather for multiple people
 - display forecast for given person
 - react router
+- storybook/styled components
 
-- CSS-in-JS 
 - install to home screen
 - offline
 - animations from reactconf video
+- realtime
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

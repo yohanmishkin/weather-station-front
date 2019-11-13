@@ -1,20 +1,19 @@
 import PeopleContainer from './effects/PeopleContainer';
 import PersonContainer from './effects/PersonContainer';
+import PersonCard from './ui/PersonCard';
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/">
         <h1>Weather station</h1>
+
         <PeopleContainer>
           {({ people }) =>
             people.map((person, index) => (
-              <Link to={`/people/${person.id}`} key={index} className="card">
-                <h2>{person.name}</h2>
-                <h3>{person.temperature}</h3>
-              </Link>
+              <PersonCard person={person} key={index} />
             ))
           }
         </PeopleContainer>
