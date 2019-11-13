@@ -25,7 +25,7 @@ export function makeServer({ environment = 'development' } = {}) {
 
     routes() {
       this.namespace = 'api';
-      // this.timing = 400;
+      this.timing = 0;
 
       this.get('/people', ({ db }) => db.people);
     }

@@ -1,7 +1,9 @@
 import App from './App';
 import { makeServer } from '../server';
-import { render, waitForDomChange } from '@testing-library/react';
+import { fireEvent, render, waitForDomChange } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import React from 'react';
+import { Router } from 'react-router-dom';
 
 describe('weather station', () => {
   let server;
@@ -17,7 +19,12 @@ describe('weather station', () => {
   it('displays the weather for multiple people', async () => {
     let [personA, personB, personC] = server.createList('person', 3);
 
-    const { getByText } = render(<App />);
+    const history = createMemoryHistory();
+    const { getByText } = render(
+      <Router history={history}>
+        <App />
+      </Router>
+    );
 
     await waitForDomChange();
 
@@ -30,5 +37,20 @@ describe('weather station', () => {
     expect(getByText(`${personC.temperature}`));
   });
 
-  it.skip('displays the forecast for a person', () => {});
+  it('displays the forecast for a person', async () => {
+    let person = server.create('person');
+
+    const history = createMemoryHistory();
+    const { getByText } = render(
+      <Router history={history}>
+        <App />
+      </Router>
+    );
+
+    await waitForDomChange();
+
+    fireEvent.click(getByText(person.name));
+
+    expect(history.location.pathname).toBe(`/people/${person.id}`);
+  });
 });
