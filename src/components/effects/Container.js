@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Container = props => {
+export default function(props) {
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
@@ -23,6 +23,4 @@ const Container = props => {
   }, []);
 
   return props.children({ people });
-};
-
-export default Container;
+}

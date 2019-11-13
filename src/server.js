@@ -12,11 +12,16 @@ export function makeServer({ environment = 'development' } = {}) {
       person: Factory.extend({
         name(i) {
           return `Mrs. ${i}`;
+        },
+        temperature() {
+          return Math.floor(Math.random() * 100);
         }
       })
     },
 
-    seeds(/*server*/) {},
+    seeds(server) {
+      server.createList('person', 5);
+    },
 
     routes() {
       this.namespace = 'api';

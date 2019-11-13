@@ -24,6 +24,10 @@ describe('weather station', () => {
     expect(getByText(personA.name));
     expect(getByText(personB.name));
     expect(getByText(personC.name));
+
+    expect(getByText(`${personA.temperature}`));
+    expect(getByText(`${personB.temperature}`));
+    expect(getByText(`${personC.temperature}`));
   });
 
   it.skip('displays the forecast for a person', () => {});
