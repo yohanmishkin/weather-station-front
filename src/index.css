@@ -1,2 +1,10 @@
-.card {
+body {
+  background-color: #fff1e8;
+  color: #000119;
+  font-family: 'Playfair Display', serif;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
 }

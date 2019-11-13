@@ -1,6 +1,6 @@
 import PeopleContainer from './effects/PeopleContainer';
 import PersonContainer from './effects/PersonContainer';
-import PersonCard from './ui/PersonCard';
+import PeopleGrid from './ui/PeopleGrid';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -11,11 +11,7 @@ function App() {
         <h1>Weather station</h1>
 
         <PeopleContainer>
-          {({ people }) =>
-            people.map((person, index) => (
-              <PersonCard person={person} key={index} />
-            ))
-          }
+          {({ people }) => <PeopleGrid people={people} />}
         </PeopleContainer>
       </Route>
 

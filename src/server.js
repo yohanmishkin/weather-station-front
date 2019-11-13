@@ -28,7 +28,7 @@ export function makeServer({ environment = 'development' } = {}) {
     },
 
     seeds(server) {
-      server.createList('person', 5);
+      server.createList('person', Math.floor(Math.random() * 10) + 5);
     },
 
     routes() {
