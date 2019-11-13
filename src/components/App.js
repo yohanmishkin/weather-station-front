@@ -23,7 +23,17 @@ function App() {
       <Route path="/people/:id">
         {({ match }) => (
           <PersonContainer id={match.params.id}>
-            {({ person }) => <h1>{person.name}</h1>}
+            {({ person }) => (
+              <div>
+                <h1>{person.name}</h1>
+                <h2>{person.temperature}</h2>
+                <ol>
+                  {person.forecasts.map((forecast, index) => (
+                    <li key={index}>{forecast.shortDescription}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
           </PersonContainer>
         )}
       </Route>

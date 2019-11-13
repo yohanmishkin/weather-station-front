@@ -54,7 +54,7 @@ describe('weather station', () => {
     expect(history.location.pathname).toBe(`/people/${person.id}`);
   });
 
-  it('displays the forecast for a person', async () => {
+  it('displays the forecasts for a person', async () => {
     let person = server.create('person');
 
     const { getByText } = render(
@@ -66,5 +66,9 @@ describe('weather station', () => {
     await waitForDomChange();
 
     expect(getByText(person.name)).toBeDefined();
+    expect(getByText(`${person.temperature}`)).toBeDefined();
+    expect(getByText(person.forecasts[0].shortDescription)).toBeDefined();
+    expect(getByText(person.forecasts[1].shortDescription)).toBeDefined();
+    expect(getByText(person.forecasts[2].shortDescription)).toBeDefined();
   });
 });

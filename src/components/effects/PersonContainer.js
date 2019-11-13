@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function(props) {
-  const [person, setPerson] = useState({});
+  const [person, setPerson] = useState(createDefaultPerson());
 
   useEffect(() => {
     let isCancelled = false;
@@ -24,3 +24,5 @@ export default function(props) {
 
   return props.children({ person });
 }
+
+const createDefaultPerson = () => ({ forecasts: [] });

@@ -10,6 +10,14 @@ export function makeServer({ environment = 'development' } = {}) {
 
     factories: {
       person: Factory.extend({
+        forecasts() {
+          return [
+            { shortDescription: 'Partly Sunny' },
+            { shortDescription: 'Mostly Cloudy' },
+            { shortDescription: 'Mostly Clear' },
+            { shortDescription: 'Sunny' }
+          ];
+        },
         name(i) {
           return `Mrs. ${i}`;
         },
