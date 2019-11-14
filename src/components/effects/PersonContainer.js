@@ -20,7 +20,7 @@ export default function(props) {
     return () => {
       isCancelled = true;
     };
-  }, []);
+  }, [props.id]);
 
   return props.children({ person });
 }

@@ -10,11 +10,11 @@ const StyledLink = styled(Link)`
   padding: 2rem;
   text-align: center;
   text-decoration: none;
+  transition: all 0.5s;
 
   :hover {
     border-bottom: solid 0.2rem;
     color: #675baa;
-    transition: all 0.3s;
   }
 `;
 

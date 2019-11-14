@@ -62,11 +62,11 @@ describe('weather station', () => {
 
     await waitForDomChange();
 
-    expect(getByText(person.name)).toBeDefined();
-    expect(getByText(`${person.temperature}`)).toBeDefined();
-    expect(getByText(person.forecasts[0].shortDescription)).toBeDefined();
-    expect(getByText(person.forecasts[1].shortDescription)).toBeDefined();
-    expect(getByText(person.forecasts[2].shortDescription)).toBeDefined();
+    expect(getByText(person.name));
+    expect(getByText(`${person.temperature}`));
+    expect(getByText(person.forecasts[0].shortDescription));
+    expect(getByText(person.forecasts[1].shortDescription));
+    expect(getByText(person.forecasts[2].shortDescription));
   });
 
   it('person page has a link back to home page', async () => {

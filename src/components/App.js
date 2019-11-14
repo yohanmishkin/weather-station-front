@@ -1,39 +1,17 @@
-import PeopleContainer from './effects/PeopleContainer';
-import PersonContainer from './effects/PersonContainer';
-import PeopleGrid from './ui/PeopleGrid';
+import HomePage from './pages/HomePage';
+import PersonPage from './pages/PersonPage';
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <h1 className="font-playfair">Weather station</h1>
-
-        <PeopleContainer>
-          {({ people }) => <PeopleGrid people={people} />}
-        </PeopleContainer>
+        <HomePage />
       </Route>
 
       <Route path="/people/:id">
-        {({ match }) => (
-          <PersonContainer id={match.params.id}>
-            {({ person }) => (
-              <div>
-                <Link to="/">Back to people</Link>
-                <div>
-                  <h1>{person.name}</h1>
-                  <h2>{person.temperature}</h2>
-                  <ol>
-                    {person.forecasts.map((forecast, index) => (
-                      <li key={index}>{forecast.shortDescription}</li>
-                    ))}
-                  </ol>
-                </div>
-              </div>
-            )}
-          </PersonContainer>
-        )}
+        {({ match }) => <PersonPage id={match.params.id} />}
       </Route>
     </Switch>
   );
