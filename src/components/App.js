@@ -8,7 +8,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <h1>Weather station</h1>
+        <h1 className="font-playfair">Weather station</h1>
 
         <PeopleContainer>
           {({ people }) => <PeopleGrid people={people} />}
