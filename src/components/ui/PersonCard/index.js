@@ -23,7 +23,7 @@ const Temperature = styled.h3``;
 
 const PersonCard = ({ person }) => {
   return (
-    <StyledLink to={`/people/${person.id}`}>
+    <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
       <Name>{person.name}</Name>
       <Temperature>{person.temperature}</Temperature>
     </StyledLink>

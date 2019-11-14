@@ -1,9 +1,8 @@
 import App from './App';
 import { makeServer } from '../server';
 import { fireEvent, render, waitForDomChange } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import React from 'react';
-import { MemoryRouter, Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('weather station', () => {
   let server;
@@ -19,11 +18,10 @@ describe('weather station', () => {
   it('displays the weather for multiple people', async () => {
     let [personA, personB, personC] = server.createList('person', 3);
 
-    const history = createMemoryHistory();
     const { getByText } = render(
-      <Router history={history}>
+      <MemoryRouter>
         <App />
-      </Router>
+      </MemoryRouter>
     );
 
     await waitForDomChange();
@@ -37,21 +35,20 @@ describe('weather station', () => {
     expect(getByText(`${personC.temperature}`));
   });
 
-  it(`can navigate to a person's page`, async () => {
+  it(`home page has links to a person page`, async () => {
     let person = server.create('person');
 
-    const history = createMemoryHistory();
-    const { getByText } = render(
-      <Router history={history}>
+    const { getByTestId } = render(
+      <MemoryRouter>
         <App />
-      </Router>
+      </MemoryRouter>
     );
 
     await waitForDomChange();
 
-    fireEvent.click(getByText(person.name));
-
-    expect(history.location.pathname).toBe(`/people/${person.id}`);
+    expect(getByTestId(`person-${person.id}`).getAttribute('href')).toBe(
+      `/people/${person.id}`
+    );
   });
 
   it('displays the forecasts for a person', async () => {
@@ -70,5 +67,17 @@ describe('weather station', () => {
     expect(getByText(person.forecasts[0].shortDescription)).toBeDefined();
     expect(getByText(person.forecasts[1].shortDescription)).toBeDefined();
     expect(getByText(person.forecasts[2].shortDescription)).toBeDefined();
+  });
+
+  it('person page has a link back to home page', async () => {
+    let person = server.create('person');
+
+    const { getByText } = render(
+      <MemoryRouter initialEntries={[`/people/${person.id}`]}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(getByText('Back to people').getAttribute('href')).toBe('/');
   });
 });

@@ -2,7 +2,7 @@ import PeopleContainer from './effects/PeopleContainer';
 import PersonContainer from './effects/PersonContainer';
 import PeopleGrid from './ui/PeopleGrid';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
@@ -20,13 +20,16 @@ function App() {
           <PersonContainer id={match.params.id}>
             {({ person }) => (
               <div>
-                <h1>{person.name}</h1>
-                <h2>{person.temperature}</h2>
-                <ol>
-                  {person.forecasts.map((forecast, index) => (
-                    <li key={index}>{forecast.shortDescription}</li>
-                  ))}
-                </ol>
+                <Link to="/">Back to people</Link>
+                <div>
+                  <h1>{person.name}</h1>
+                  <h2>{person.temperature}</h2>
+                  <ol>
+                    {person.forecasts.map((forecast, index) => (
+                      <li key={index}>{forecast.shortDescription}</li>
+                    ))}
+                  </ol>
+                </div>
               </div>
             )}
           </PersonContainer>
