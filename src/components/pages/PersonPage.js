@@ -9,7 +9,7 @@ export default function(props) {
         <div>
           <Link to="/">Back to people</Link>
           <div>
-            <h1>{person.name}</h1>
+            <h1 className="font-playfair">{person.name}</h1>
             <h2>{person.temperature}</h2>
             <ol>
               {person.forecasts.map((forecast, index) => (

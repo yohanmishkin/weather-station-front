@@ -1,6 +1,6 @@
 import App from './App';
 import { makeServer } from '../server';
-import { fireEvent, render, waitForDomChange } from '@testing-library/react';
+import { render, waitForDomChange } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ describe('weather station', () => {
   it('displays the weather for multiple people', async () => {
     let [personA, personB, personC] = server.createList('person', 3);
 
-    const { getByText } = render(
+    const { getByAltText, getByText } = render(
       <MemoryRouter>
         <App />
       </MemoryRouter>
@@ -33,6 +33,10 @@ describe('weather station', () => {
     expect(getByText(`${personA.temperature}`));
     expect(getByText(`${personB.temperature}`));
     expect(getByText(`${personC.temperature}`));
+
+    expect(getByAltText(`${personA.name}'s headshot`));
+    expect(getByAltText(`${personB.name}'s headshot`));
+    expect(getByAltText(`${personC.name}'s headshot`));
   });
 
   it('home page has links to a person page', async () => {
