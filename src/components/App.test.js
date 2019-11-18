@@ -35,7 +35,7 @@ describe('weather station', () => {
     expect(getByText(`${personC.temperature}`));
   });
 
-  it(`home page has links to a person page`, async () => {
+  it('home page has links to a person page', async () => {
     let person = server.create('person');
 
     const { getByTestId } = render(
