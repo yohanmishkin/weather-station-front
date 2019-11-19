@@ -1,12 +1,9 @@
+import App from './components/App';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
-import { makeServer } from './server';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-makeServer({ environment: 'development' });
 
 ReactDOM.render(
   <Router>

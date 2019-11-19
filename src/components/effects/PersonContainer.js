@@ -1,3 +1,4 @@
+import config from '../../config';
 import { useEffect, useState } from 'react';
 
 export default function(props) {
@@ -7,7 +8,7 @@ export default function(props) {
     let isCancelled = false;
 
     const fetchPerson = async () => {
-      let response = await fetch(`/api/people/${props.id}`);
+      let response = await fetch(`${config.apiUrl}/api/people/${props.id}`);
       let json = await response.json();
 
       if (!isCancelled) {
