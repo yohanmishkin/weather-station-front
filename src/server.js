@@ -12,10 +12,10 @@ export function makeServer({ environment = 'development' } = {}) {
       person: Factory.extend({
         forecasts() {
           return [
-            { shortDescription: 'Partly Sunny' },
-            { shortDescription: 'Mostly Cloudy' },
-            { shortDescription: 'Mostly Clear' },
-            { shortDescription: 'Sunny' }
+            { period: 'Thursday', shortDescription: 'Partly Sunny' },
+            { period: 'Friday', shortDescription: 'Mostly Cloudy' },
+            { period: 'Saturday', shortDescription: 'Mostly Clear' },
+            { period: 'Sunday', shortDescription: 'Sunny' }
           ];
         },
         name(i) {

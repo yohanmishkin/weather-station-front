@@ -23,16 +23,12 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Name = styled.h2``;
-
-const Temperature = styled.h3``;
-
 const PersonCard = ({ person }) => {
   return (
     <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
       <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
-      <Name className="font-playfair">{person.name}</Name>
-      <Temperature>{person.temperature}</Temperature>
+      <h2 className="font-playfair">{person.name}</h2>
+      <h3>{person.temperature}</h3>
     </StyledLink>
   );
 };

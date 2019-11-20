@@ -69,6 +69,9 @@ describe('weather station', () => {
     expect(getByAltText(`${person.name}'s headshot`));
     expect(getByText(person.name));
     expect(getByText(`${person.temperature}`));
+    expect(getByText(person.forecasts[0].period));
+    expect(getByText(person.forecasts[1].period));
+    expect(getByText(person.forecasts[2].period));
     expect(getByText(person.forecasts[0].shortDescription));
     expect(getByText(person.forecasts[1].shortDescription));
     expect(getByText(person.forecasts[2].shortDescription));
