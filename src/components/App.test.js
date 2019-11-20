@@ -58,7 +58,7 @@ describe('weather station', () => {
   it('displays the forecasts for a person', async () => {
     let person = server.create('person');
 
-    const { getByText } = render(
+    const { getByAltText, getByText } = render(
       <MemoryRouter initialEntries={[`/people/${person.id}`]}>
         <App />
       </MemoryRouter>
@@ -66,6 +66,7 @@ describe('weather station', () => {
 
     await waitForDomChange();
 
+    expect(getByAltText(`${person.name}'s headshot`));
     expect(getByText(person.name));
     expect(getByText(`${person.temperature}`));
     expect(getByText(person.forecasts[0].shortDescription));

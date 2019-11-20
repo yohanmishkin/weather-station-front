@@ -9,6 +9,7 @@ export default function(props) {
         <div>
           <Link to="/">Back to people</Link>
           <div>
+            <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
             <h1 className="font-playfair">{person.name}</h1>
             <h2>{person.temperature}</h2>
             <ol>
