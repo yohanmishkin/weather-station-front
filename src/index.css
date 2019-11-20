@@ -5,6 +5,15 @@ body {
   margin: unset;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-height: 100vh;
+}
+
 .font-pt-sans {
   font-family: 'PT Sans', sans-serif;
 }
