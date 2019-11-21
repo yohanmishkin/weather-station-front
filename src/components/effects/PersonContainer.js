@@ -1,9 +1,10 @@
 import config from '../../config';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function(props) {
+const PersonContainer = props => {
   const [forecasts, setForecasts] = useState([]);
-  const [person, setPerson] = useState(createDefaultPerson());
+  const [person, setPerson] = useState({});
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -49,6 +50,10 @@ export default function(props) {
   }, [props.id]);
 
   return props.children({ isLoading, forecasts, person, weather });
-}
+};
 
-const createDefaultPerson = () => ({ forecasts: [] });
+PersonContainer.propTypes = {
+  children: PropTypes.func.isRequired
+};
+
+export default PersonContainer;
