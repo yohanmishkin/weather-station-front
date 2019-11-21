@@ -10,6 +10,12 @@ export function makeServer({ environment = 'development' } = {}) {
 
     factories: {
       person: Factory.extend({
+        currentTemperature() {
+          return Math.floor(Math.random() * 100);
+        },
+        currentWeather() {
+          return 'rain_showers';
+        },
         forecasts() {
           return [
             { period: 'Thursday', shortDescription: 'Partly Sunny' },
@@ -20,9 +26,6 @@ export function makeServer({ environment = 'development' } = {}) {
         },
         name(i) {
           return `Mrs. ${i}`;
-        },
-        temperature() {
-          return Math.floor(Math.random() * 100);
         }
       })
     },

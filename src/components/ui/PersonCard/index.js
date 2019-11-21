@@ -28,7 +28,6 @@ const PersonCard = ({ person }) => {
     <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
       <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
       <h2 className="font-playfair">{person.name}</h2>
-      <h3>{person.temperature}</h3>
     </StyledLink>
   );
 };

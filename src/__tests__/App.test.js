@@ -1,4 +1,4 @@
-import App from './App';
+import App from '../components/App';
 import { makeServer } from '../server';
 import { render, waitForDomChange } from '@testing-library/react';
 import React from 'react';
@@ -26,17 +26,13 @@ describe('weather station', () => {
 
     await waitForDomChange();
 
-    expect(getByText(personA.name));
-    expect(getByText(personB.name));
-    expect(getByText(personC.name));
+    expect(getByText(personA.name)).toBeDefined();
+    expect(getByText(personB.name)).toBeDefined();
+    expect(getByText(personC.name)).toBeDefined();
 
-    expect(getByText(`${personA.temperature}`));
-    expect(getByText(`${personB.temperature}`));
-    expect(getByText(`${personC.temperature}`));
-
-    expect(getByAltText(`${personA.name}'s headshot`));
-    expect(getByAltText(`${personB.name}'s headshot`));
-    expect(getByAltText(`${personC.name}'s headshot`));
+    expect(getByAltText(`${personA.name}'s headshot`)).toBeDefined();
+    expect(getByAltText(`${personB.name}'s headshot`)).toBeDefined();
+    expect(getByAltText(`${personC.name}'s headshot`)).toBeDefined();
   });
 
   it('home page has links to a person page', async () => {
@@ -66,15 +62,16 @@ describe('weather station', () => {
 
     await waitForDomChange();
 
-    expect(getByAltText(`${person.name}'s headshot`));
-    expect(getByText(person.name));
-    expect(getByText(`${person.temperature}`));
-    expect(getByText(person.forecasts[0].period));
-    expect(getByText(person.forecasts[1].period));
-    expect(getByText(person.forecasts[2].period));
-    expect(getByText(person.forecasts[0].shortDescription));
-    expect(getByText(person.forecasts[1].shortDescription));
-    expect(getByText(person.forecasts[2].shortDescription));
+    expect(getByAltText(`${person.name}'s headshot`)).toBeDefined();
+    expect(getByText(person.name)).toBeDefined();
+    expect(getByText(`${person.currentTemperature}`)).toBeDefined();
+    expect(getByAltText(`${person.currentWeather}`)).toBeDefined();
+    expect(getByText(person.forecasts[0].period)).toBeDefined();
+    expect(getByText(person.forecasts[1].period)).toBeDefined();
+    expect(getByText(person.forecasts[2].period)).toBeDefined();
+    expect(getByText(person.forecasts[0].shortDescription)).toBeDefined();
+    expect(getByText(person.forecasts[1].shortDescription)).toBeDefined();
+    expect(getByText(person.forecasts[2].shortDescription)).toBeDefined();
   });
 
   it('person page has a link back to home page', async () => {

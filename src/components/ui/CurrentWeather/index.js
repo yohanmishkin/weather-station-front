@@ -28,6 +28,8 @@ const CurrentWeater = ({ person }) => {
     <StyledWeather>
       <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
       <h1 className="font-playfair">{person.name}</h1>
+      <h2 className="font-playfair">{person.currentTemperature}</h2>
+      <img alt={`${person.currentWeather}`} src={''} />
     </StyledWeather>
   );
 };
