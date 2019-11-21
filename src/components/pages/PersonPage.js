@@ -3,6 +3,7 @@ import CurrentWeather from '../ui/CurrentWeather';
 import Forecast from '../ui/Forecast';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Layout = styled.div`
@@ -25,21 +26,35 @@ const Layout = styled.div`
   }
 `;
 
-export default function(props) {
+const WeatherOnceLoaded = props => {
+  if (props.isLoading) {
+    return <span data-testid="current-weather-loading">Loading!</span>;
+  }
+
+  return <CurrentWeather person={props.person} />;
+};
+
+const PersonPage = props => {
   return (
     <PersonContainer id={props.id}>
-      {({ person }) => (
+      {({ isLoading, person }) => (
         <Layout>
           <Link to="/">Back to people</Link>
-          <CurrentWeather person={person} />
+          <WeatherOnceLoaded isLoading={isLoading} person={person} />
           <Forecast person={person} />
         </Layout>
       )}
     </PersonContainer>
   );
-}
+};
+
+PersonPage.propTypes = {
+  id: PropTypes.any.isRequired
+};
+
+export default PersonPage;
+
 // <Curve>
 //   <div className="wave-one"></div>
 //   <div className="wave-two"></div>
 // </Curve>
-// <StyledLink to="/">Back to people</StyledLink>

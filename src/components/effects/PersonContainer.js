@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 export default function(props) {
   const [person, setPerson] = useState(createDefaultPerson());
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isCancelled = false;
@@ -13,17 +14,19 @@ export default function(props) {
 
       if (!isCancelled) {
         setPerson(json);
+        setIsLoading(false);
       }
     };
 
     fetchPerson();
 
-    return () => {
+    return function cleanUp() {
       isCancelled = true;
+      setIsLoading(false);
     };
   }, [props.id]);
 
-  return props.children({ person });
+  return props.children({ isLoading, person });
 }
 
 const createDefaultPerson = () => ({ forecasts: [] });
