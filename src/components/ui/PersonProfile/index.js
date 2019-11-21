@@ -2,17 +2,53 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const Curve = styled.div`
+  z-index: 10;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  align-items: flex-end;
+
+  div {
+    border-radius: 100%;
+    background-color: #675baa;
+    height: 20rem;
+    position: absolute;
+    width: 100%;
+  }
+
+  .wave-one {
+    right: -29rem;
+    opacity: 70%;
+
+    width: 65rem;
+    height: 9rem;
+    top: 28rem;
+  }
+  .wave-two {
+    right: -9rem;
+    width: 100rem;
+    height: 30rem;
+    top: 27rem;
+  }
+`;
+
 const StyledLink = styled(Link)`
   display: block;
   padding-bottom: 1rem;
   padding-top: 1rem;
   text-align: center;
+  z-index: 20;
 `;
 
 const Profile = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  z-index: 20;
 
   img {
     border-radius: 0.35rem;
@@ -63,6 +99,10 @@ const Profile = styled.div`
 const PersonProfile = ({ person }) => {
   return (
     <>
+      <Curve>
+        <div className="wave-one"></div>
+        <div className="wave-two"></div>
+      </Curve>
       <StyledLink to="/">Back to people</StyledLink>
       <Profile>
         <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
