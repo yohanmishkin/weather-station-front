@@ -18,11 +18,16 @@ describe('weather station', () => {
 
   it('displays the forecasts for a person', async () => {
     const person = server.create('person');
-    // GET /api/people/:id
-    // GET /api/weather/:lat,:long
-    // GET /api/forecast/:lat,:long
+    const weather = server.create('weather', {
+      lat: person.lat,
+      long: person.long
+    });
+    const forecasts = server.createList('forecast', 3, {
+      lat: person.lat,
+      long: person.long
+    });
 
-    const { getByAltText, getByText } = render(
+    const { getByAltText, getByText, getAllByText } = render(
       <MemoryRouter>
         <PersonPage id={person.id} />
       </MemoryRouter>
@@ -30,16 +35,15 @@ describe('weather station', () => {
 
     await waitForDomChange();
 
-    expect(getByAltText(`${person.name}'s headshot`)).toBeDefined();
-    expect(getByText(person.name)).toBeDefined();
-    expect(getByText(`${person.currentTemperature}`)).toBeDefined();
-    expect(getByAltText(person.currentWeather)).toBeDefined();
-    expect(getByText(person.forecasts[0].period)).toBeDefined();
-    expect(getByText(person.forecasts[1].period)).toBeDefined();
-    expect(getByText(person.forecasts[2].period)).toBeDefined();
-    expect(getByText(person.forecasts[0].shortDescription)).toBeDefined();
-    expect(getByText(person.forecasts[1].shortDescription)).toBeDefined();
-    expect(getByText(person.forecasts[2].shortDescription)).toBeDefined();
+    expect(getByText(person.name)).toBeInTheDocument();
+    expect(getByText(`${weather.temperature}°F`)).toBeDefined();
+    expect(getByAltText(weather.type)).toBeDefined();
+    expect(getAllByText(forecasts[0].period)).toBeDefined();
+    expect(getAllByText(forecasts[1].period)).toBeDefined();
+    expect(getAllByText(forecasts[2].period)).toBeDefined();
+    expect(getAllByText(forecasts[0].shortDescription)).toBeDefined();
+    expect(getAllByText(forecasts[1].shortDescription)).toBeDefined();
+    expect(getAllByText(forecasts[2].shortDescription)).toBeDefined();
   });
 
   it('person page has a link back to home page', async () => {

@@ -9,11 +9,15 @@ import styled from 'styled-components';
 const PersonPage = ({ id }) => {
   return (
     <PersonContainer id={id}>
-      {({ isLoading, person }) => (
+      {({ isLoading, forecasts, person, weather }) => (
         <Layout>
           <Link to="/">Back to people</Link>
-          <CurrentWeather isLoading={isLoading} person={person} />
-          <Forecast isLoading={isLoading} person={person} />
+          <CurrentWeather
+            isLoading={isLoading}
+            person={person}
+            weather={weather}
+          />
+          <Forecast isLoading={isLoading} forecasts={forecasts} />
         </Layout>
       )}
     </PersonContainer>

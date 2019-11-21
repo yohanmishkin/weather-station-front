@@ -4,19 +4,19 @@ import React from 'react';
 import styled from 'styled-components';
 import withLoading from '../withLoading';
 
-const CurrentWeather = ({ person }) => {
+const CurrentWeather = ({ person, weather }) => {
   return (
     <StyledWeather>
-      <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
+      <WeatherImage weather={weather.type} />
       <h1 className="font-playfair">{person.name}</h1>
-      <h2 className="font-playfair">{person.currentTemperature}</h2>
-      <WeatherImage weather={person.currentWeather} />
+      <h2 className="font-playfair">{weather.temperature}°F</h2>
     </StyledWeather>
   );
 };
 
 CurrentWeather.propTypes = {
-  person: PropTypes.object.isRequired
+  person: PropTypes.object.isRequired,
+  weather: PropTypes.object.isRequired
 };
 
 const StyledWeather = styled.div`

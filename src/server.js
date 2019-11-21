@@ -5,28 +5,26 @@ export function makeServer({ environment = 'development' } = {}) {
     environment,
 
     models: {
-      person: Model
+      forecast: Model,
+      person: Model,
+      weather: Model
     },
 
     factories: {
       person: Factory.extend({
-        currentTemperature() {
-          return Math.floor(Math.random() * 100);
-        },
-        currentWeather() {
-          return 'rain_showers';
-        },
-        forecasts() {
-          return [
-            { period: 'Thursday', shortDescription: 'Partly Sunny' },
-            { period: 'Friday', shortDescription: 'Mostly Cloudy' },
-            { period: 'Saturday', shortDescription: 'Mostly Clear' },
-            { period: 'Sunday', shortDescription: 'Sunny' }
-          ];
-        },
-        name(i) {
-          return `Mrs. ${i}`;
-        }
+        lat: () => randomDecimal(),
+        long: () => randomDecimal(),
+        name: i => `Mrs. ${i}`
+      }),
+
+      forecast: Factory.extend({
+        period: () => 'Tomorrow',
+        shortDescription: () => 'Sunny'
+      }),
+
+      weather: Factory.extend({
+        temperature: () => Math.floor(randomDecimal()),
+        type: () => 'rain_showers'
       })
     },
 
@@ -38,12 +36,24 @@ export function makeServer({ environment = 'development' } = {}) {
       this.namespace = 'api';
       this.timing = 0;
 
+      this.get('/forecast', ({ db }, request) => {
+        let { lat, long } = request.queryParams;
+        return db.forecasts.where({ lat, long });
+      });
       this.get('/people', ({ db }) => db.people);
       this.get('/people/:id', ({ db }, request) =>
         db.people.find(request.params.id)
       );
+      this.get('/weather', ({ db }, request) => {
+        let { lat, long } = request.queryParams;
+        return db.weathers.where({ lat, long })[0];
+      });
     }
   });
 
   return server;
 }
+
+const randomDecimal = () => {
+  return (Math.random() * (100 * Math.random()) + 15).toFixed(3);
+};
