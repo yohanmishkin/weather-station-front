@@ -2,11 +2,20 @@
 - display forecast for given person
 - react router
 - storybook/styled components
+- high order components
+- prop types
 
 - install to home screen
 - offline
 - animations from reactconf video
 - realtime
+
+- render props
+- context
+- ref
+- reconciliation
+- 3rd party
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

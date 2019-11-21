@@ -1,11 +1,12 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import withLoading from '../withLoading';
 
-const Forecast = props => {
+const Forecast = ({ person }) => {
   return (
     <StyledDescriptionList>
-      {props.person.forecasts.map((forecast, index) => (
+      {person.forecasts.map((forecast, index) => (
         <div className="row" key={index}>
           <dt>{forecast.period}</dt>
           <dd>{forecast.shortDescription}</dd>
@@ -13,6 +14,10 @@ const Forecast = props => {
       ))}
     </StyledDescriptionList>
   );
+};
+
+Forecast.propTypes = {
+  person: PropTypes.object.isRequired
 };
 
 const StyledDescriptionList = styled.dl`

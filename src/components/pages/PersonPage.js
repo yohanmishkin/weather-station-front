@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const PersonPage = props => {
+const PersonPage = ({ id }) => {
   return (
-    <PersonContainer id={props.id}>
+    <PersonContainer id={id}>
       {({ isLoading, person }) => (
         <Layout>
           <Link to="/">Back to people</Link>

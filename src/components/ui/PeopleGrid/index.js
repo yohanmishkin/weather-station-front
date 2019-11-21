@@ -1,6 +1,25 @@
 import PersonCard from '../PersonCard';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+
+const PeopleGrid = ({ people }) => {
+  return (
+    <Container>
+      <GridRow>
+        {people.map((person, index) => (
+          <GridItem key={index}>
+            <PersonCard person={person} />
+          </GridItem>
+        ))}
+      </GridRow>
+    </Container>
+  );
+};
+
+PeopleGrid.propTypes = {
+  people: PropTypes.array.isRequired
+};
 
 const Container = styled.div`
   margin: 0 auto;
@@ -31,19 +50,5 @@ const GridItem = styled.div`
     flex-basis: 100%;
   }
 `;
-
-const PeopleGrid = function({ people }) {
-  return (
-    <Container>
-      <GridRow>
-        {people.map((person, index) => (
-          <GridItem key={index}>
-            <PersonCard person={person} />
-          </GridItem>
-        ))}
-      </GridRow>
-    </Container>
-  );
-};
 
 export default PeopleGrid;

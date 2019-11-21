@@ -18,6 +18,9 @@ describe('weather station', () => {
 
   it('displays the forecasts for a person', async () => {
     const person = server.create('person');
+    // GET /api/people/:id
+    // GET /api/weather/:lat,:long
+    // GET /api/forecast/:lat,:long
 
     const { getByAltText, getByText } = render(
       <MemoryRouter>

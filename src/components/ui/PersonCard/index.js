@@ -1,6 +1,20 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+const PersonCard = ({ person }) => {
+  return (
+    <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
+      <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
+      <h2 className="font-playfair">{person.name}</h2>
+    </StyledLink>
+  );
+};
+
+PersonCard.propTypes = {
+  person: PropTypes.object.isRequired
+};
 
 const StyledLink = styled(Link)`
   border: transparent solid 0.2rem;
@@ -22,14 +36,5 @@ const StyledLink = styled(Link)`
     width: 100%;
   }
 `;
-
-const PersonCard = ({ person }) => {
-  return (
-    <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
-      <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
-      <h2 className="font-playfair">{person.name}</h2>
-    </StyledLink>
-  );
-};
 
 export default PersonCard;
