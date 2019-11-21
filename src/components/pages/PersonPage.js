@@ -6,6 +6,24 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+const PersonPage = props => {
+  return (
+    <PersonContainer id={props.id}>
+      {({ isLoading, person }) => (
+        <Layout>
+          <Link to="/">Back to people</Link>
+          <CurrentWeather isLoading={isLoading} person={person} />
+          <Forecast isLoading={isLoading} person={person} />
+        </Layout>
+      )}
+    </PersonContainer>
+  );
+};
+
+PersonPage.propTypes = {
+  id: PropTypes.any.isRequired
+};
+
 const Layout = styled.div`
   align-items: center;
   display: flex;
@@ -25,32 +43,6 @@ const Layout = styled.div`
     }
   }
 `;
-
-const WeatherOnceLoaded = props => {
-  if (props.isLoading) {
-    return <span data-testid="current-weather-loading">Loading!</span>;
-  }
-
-  return <CurrentWeather person={props.person} />;
-};
-
-const PersonPage = props => {
-  return (
-    <PersonContainer id={props.id}>
-      {({ isLoading, person }) => (
-        <Layout>
-          <Link to="/">Back to people</Link>
-          <WeatherOnceLoaded isLoading={isLoading} person={person} />
-          <Forecast person={person} />
-        </Layout>
-      )}
-    </PersonContainer>
-  );
-};
-
-PersonPage.propTypes = {
-  id: PropTypes.any.isRequired
-};
 
 export default PersonPage;
 

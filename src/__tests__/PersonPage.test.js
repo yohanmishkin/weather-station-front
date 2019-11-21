@@ -30,7 +30,7 @@ describe('weather station', () => {
     expect(getByAltText(`${person.name}'s headshot`)).toBeDefined();
     expect(getByText(person.name)).toBeDefined();
     expect(getByText(`${person.currentTemperature}`)).toBeDefined();
-    expect(getByAltText(`${person.currentWeather}`)).toBeDefined();
+    expect(getByAltText(person.currentWeather)).toBeDefined();
     expect(getByText(person.forecasts[0].period)).toBeDefined();
     expect(getByText(person.forecasts[1].period)).toBeDefined();
     expect(getByText(person.forecasts[2].period)).toBeDefined();
@@ -60,6 +60,18 @@ describe('weather station', () => {
       </MemoryRouter>
     );
 
-    expect(queryByTestId('current-weather-loading')).toBeInTheDocument();
+    expect(queryByTestId('weather-loading')).toBeInTheDocument();
+  });
+
+  it('it shows loading spinner while waiting for forecast to load', () => {
+    const person = server.create('person');
+
+    const { queryByTestId } = render(
+      <MemoryRouter>
+        <PersonPage id={person.id} />
+      </MemoryRouter>
+    );
+
+    expect(queryByTestId('forecast-loading')).toBeInTheDocument();
   });
 });

@@ -1,6 +1,23 @@
 import WeatherImage from '../WeatherImage';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+import withLoading from '../withLoading';
+
+const CurrentWeather = ({ person }) => {
+  return (
+    <StyledWeather>
+      <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
+      <h1 className="font-playfair">{person.name}</h1>
+      <h2 className="font-playfair">{person.currentTemperature}</h2>
+      <WeatherImage weather={person.currentWeather} />
+    </StyledWeather>
+  );
+};
+
+CurrentWeather.propTypes = {
+  person: PropTypes.object.isRequired
+};
 
 const StyledWeather = styled.div`
   display: flex;
@@ -24,15 +41,4 @@ const StyledWeather = styled.div`
   }
 `;
 
-const CurrentWeather = ({ person }) => {
-  return (
-    <StyledWeather>
-      <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
-      <h1 className="font-playfair">{person.name}</h1>
-      <h2 className="font-playfair">{person.currentTemperature}</h2>
-      <WeatherImage weather={person.currentWeather} />
-    </StyledWeather>
-  );
-};
-
-export default CurrentWeather;
+export default withLoading(CurrentWeather, 'weather-loading');

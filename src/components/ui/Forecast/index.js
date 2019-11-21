@@ -1,5 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import withLoading from '../withLoading';
+
+const Forecast = props => {
+  return (
+    <StyledDescriptionList>
+      {props.person.forecasts.map((forecast, index) => (
+        <div className="row" key={index}>
+          <dt>{forecast.period}</dt>
+          <dd>{forecast.shortDescription}</dd>
+        </div>
+      ))}
+    </StyledDescriptionList>
+  );
+};
 
 const StyledDescriptionList = styled.dl`
   display: flex;
@@ -68,17 +82,4 @@ const StyledDescriptionList = styled.dl`
   }
 `;
 
-const Forecast = ({ person }) => {
-  return (
-    <StyledDescriptionList>
-      {person.forecasts.map((forecast, index) => (
-        <div className="row" key={index}>
-          <dt>{forecast.period}</dt>
-          <dd>{forecast.shortDescription}</dd>
-        </div>
-      ))}
-    </StyledDescriptionList>
-  );
-};
-
-export default Forecast;
+export default withLoading(Forecast, 'forecast-loading');

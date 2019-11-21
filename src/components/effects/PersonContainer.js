@@ -22,7 +22,6 @@ export default function(props) {
 
     return function cleanUp() {
       isCancelled = true;
-      setIsLoading(false);
     };
   }, [props.id]);
 
