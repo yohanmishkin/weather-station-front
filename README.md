@@ -10,6 +10,8 @@
 - offline ?? data caching ??
 
 - animations from reactconf video
+- <Curve />
+- Loading spinner
 - realtime
 
 - context
