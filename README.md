@@ -4,13 +4,14 @@
 - storybook/styled components
 - high order components
 - prop types
+- render props
 
 - install to home screen
-- offline
+- offline ?? data caching ??
+
 - animations from reactconf video
 - realtime
 
-- render props
 - context
 - ref
 - reconciliation

@@ -20,6 +20,7 @@ CurrentWeather.propTypes = {
 };
 
 const StyledWeather = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -27,17 +28,8 @@ const StyledWeather = styled.div`
 
   img {
     border-radius: 0.35rem;
-    margin: auto;
-    margin-bottom: 1rem;
-    margin-top: unset;
     max-width: 20rem;
     width: 100%;
-  }
-
-  h1 {
-    margin: auto;
-    margin-bottom: 1rem;
-    margin-top: unset;
   }
 `;
 
