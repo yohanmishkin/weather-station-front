@@ -1,17 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { config, Trail } from 'react-spring/renderprops';
 import styled from 'styled-components';
 import withLoading from '../withLoading';
 
 const Forecast = ({ forecasts }) => {
   return (
     <StyledDescriptionList>
-      {forecasts.map((forecast, index) => (
-        <div className="row" key={index}>
-          <dt>{forecast.period}</dt>
-          <dd>{forecast.shortDescription}</dd>
-        </div>
-      ))}
+      <Trail
+        config={config.stiff}
+        items={forecasts}
+        keys={item => item.period}
+        from={{
+          transform: 'translateX(80px)',
+          opacity: 0
+        }}
+        to={{ transform: 'translateX(0px)', opacity: 1 }}
+      >
+        {(forecast, index) => props => (
+          <div className="row" key={index} style={props}>
+            <dt>{forecast.period}</dt>
+            <dd>{forecast.shortDescription}</dd>
+          </div>
+        )}
+      </Trail>
     </StyledDescriptionList>
   );
 };
@@ -54,6 +66,7 @@ const StyledDescriptionList = styled.dl`
     color: white;
     flex-direction: column;
     height: 80%;
+    overflow-x: hidden;
     overflow-y: scroll;
     margin-bottom: unset;
     margin-top: unset;

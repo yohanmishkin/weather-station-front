@@ -5,14 +5,26 @@
 - high order components
 - prop types
 - render props
+
+- random order people
+
 - install to home screen
+  - prompt user to install
+  - don't prompt pwa users
 
 - offline ?? data caching ??
+  - progressively cache forecasts as you scroll
+  - alert uncached when offline
+
 - context
 - ref
 - reconciliation
 - 3rd party
 
+- style
+  - slide in forecasts | desktop
+  - slide up forecasts | mobile
+  - 
 - animations from reactconf video
 - <Curve />
 - Loading spinner

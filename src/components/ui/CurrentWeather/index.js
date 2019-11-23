@@ -1,16 +1,33 @@
 import WeatherImage from '../WeatherImage';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { config, Spring } from 'react-spring/renderprops';
 import styled from 'styled-components';
 import withLoading from '../withLoading';
 
 const CurrentWeather = ({ person, weather }) => {
   return (
-    <StyledWeather>
-      <WeatherImage weather={weather.type} />
-      <h1 className="font-playfair">{person.name}</h1>
-      <h2 className="font-playfair">{weather.temperature}°F</h2>
-    </StyledWeather>
+    <Spring
+      config={config.stiff}
+      from={{ transform: 'translateX(-500px)', opacity: 0 }}
+      to={{ transform: 'translateX(0)', opacity: 1 }}
+    >
+      {props => (
+        <StyledWeather style={props}>
+          <WeatherImage weather={weather.type} />
+          <h1 className="font-playfair">{person.name}</h1>
+          <Spring
+            config={config.molasses}
+            from={{ number: 0 }}
+            to={{ number: weather.temperature }}
+          >
+            {props => (
+              <h2 className="font-playfair">{props.number.toFixed(0)}°F</h2>
+            )}
+          </Spring>
+        </StyledWeather>
+      )}
+    </Spring>
   );
 };
 
@@ -24,6 +41,7 @@ const StyledWeather = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  text-align: center;
   width: 60%;
 
   img {
