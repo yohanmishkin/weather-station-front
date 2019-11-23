@@ -36,11 +36,18 @@ const Layout = styled.div`
   height: 100%;
   position: relative;
 
+  a {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
   @media (min-width: 750px) {
     flex-direction: row;
     height: 100vh;
 
     a {
+      margin-bottom: unset;
+      margin-top: unset;
       position: absolute;
       top: 1rem;
       left: 1rem;

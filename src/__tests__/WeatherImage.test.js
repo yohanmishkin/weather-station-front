@@ -9,10 +9,9 @@ describe('WeatherImage', () => {
 
     const { queryByAltText } = render(<WeatherImage weather={weather} />);
 
-    expect(queryByAltText(weather)).toBeInTheDocument();
     expect(queryByAltText(weather)).toHaveAttribute(
       'src',
-      `/icons/${weather}.svg`
+      'lightning-weather.svg'
     );
   });
 });

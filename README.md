@@ -5,19 +5,18 @@
 - high order components
 - prop types
 - render props
-
 - install to home screen
+
 - offline ?? data caching ??
+- context
+- ref
+- reconciliation
+- 3rd party
 
 - animations from reactconf video
 - <Curve />
 - Loading spinner
 - realtime
-
-- context
-- ref
-- reconciliation
-- 3rd party
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
