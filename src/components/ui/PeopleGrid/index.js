@@ -8,7 +8,7 @@ const PeopleGrid = ({ people }) => {
     <Container>
       <GridRow>
         {people.map((person, index) => (
-          <GridItem key={index}>
+          <GridItem key={index} data-testid={`person-card-${index}`}>
             <PersonCard person={person} />
           </GridItem>
         ))}

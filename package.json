@@ -7,6 +7,8 @@
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-spring": "^8.0.27",
+    "seedrandom": "^3.0.5",
     "styled-components": "^4.4.1"
   },
   "scripts": {
@@ -44,7 +46,6 @@
     "eslint-plugin-react": "^7.16.0",
     "miragejs": "^0.1.31",
     "prettier": "1.19.1",
-    "react-spring": "^8.0.27",
     "storybook-react-router": "^1.0.8"
   },
   "proxy": "http://localhost:4000"

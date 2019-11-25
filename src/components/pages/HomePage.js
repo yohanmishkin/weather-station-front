@@ -1,4 +1,5 @@
 import PeopleContainer from '../effects/PeopleContainer';
+import RandomizedList from '../effects/RandomizedList';
 import PeopleGrid from '../ui/PeopleGrid';
 import React from 'react';
 import styled from 'styled-components';
@@ -9,7 +10,13 @@ export default function() {
       <h1 className="font-playfair">WeatherStation</h1>
 
       <PeopleContainer>
-        {({ people }) => <PeopleGrid people={people} />}
+        {({ people }) => (
+          <RandomizedList items={people}>
+            {({ items: randomizedPeople }) => (
+              <PeopleGrid people={randomizedPeople} />
+            )}
+          </RandomizedList>
+        )}
       </PeopleContainer>
     </Layout>
   );

@@ -1,7 +1,7 @@
 import WeatherImage from '../WeatherImage';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { config, Spring } from 'react-spring/renderprops';
+import { config, Spring } from 'react-spring/renderprops.cjs'; // cjs? -> https://github.com/facebook/jest/issues/8186
 import styled from 'styled-components';
 import withLoading from '../withLoading';
 

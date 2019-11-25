@@ -5,7 +5,6 @@
 - high order components
 - prop types
 - render props
-
 - random order people
 
 - install to home screen

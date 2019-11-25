@@ -18,7 +18,7 @@ export function makeServer({ environment = 'development' } = {}) {
       }),
 
       forecast: Factory.extend({
-        period: () => 'Tomorrow',
+        period: i => `Tomorrow-${i}`,
         shortDescription: () => 'Sunny'
       }),
 
