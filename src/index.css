@@ -2,7 +2,6 @@ body {
   background-color: #fff1e8;
   color: #000119;
   height: 100%;
-  height: calc(var(--vh, 1vh) * 100);
   margin: unset;
 }
 
