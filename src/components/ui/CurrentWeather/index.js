@@ -16,15 +16,7 @@ const CurrentWeather = ({ person, weather }) => {
         <StyledWeather style={props}>
           <WeatherImage weather={weather.type} />
           <h1 className="font-playfair">{person.name}</h1>
-          <Spring
-            config={config.molasses}
-            from={{ number: 0 }}
-            to={{ number: weather.temperature }}
-          >
-            {props => (
-              <h2 className="font-playfair">{props.number.toFixed(0)}°F</h2>
-            )}
-          </Spring>
+          <h2 className="font-playfair">{weather.temperature.toFixed(0)}°F</h2>
         </StyledWeather>
       )}
     </Spring>
