@@ -4,14 +4,11 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 describe('WeatherImage', () => {
-  it('displays thunderstorms', () => {
-    const weather = 'thunderstorms';
+  it('displays appromixate weather', () => {
+    const weather = 'Most Cloud';
 
-    const { queryByAltText } = render(<WeatherImage weather={weather} />);
+    const { getByTestId } = render(<WeatherImage weather={weather} />);
 
-    expect(queryByAltText(weather)).toHaveAttribute(
-      'src',
-      'lightning-weather.svg'
-    );
+    expect(getByTestId('mostly-cloudy-svg')).toBeInTheDocument();
   });
 });

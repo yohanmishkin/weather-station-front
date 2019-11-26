@@ -37,7 +37,7 @@ describe('weather station', () => {
 
     expect(getByText(person.name)).toBeInTheDocument();
     expect(getByText(`${weather.temperature}°F`)).toBeDefined();
-    expect(getByAltText(weather.type)).toBeDefined();
+    expect(getByText(weather.type)).toBeDefined();
     expect(getAllByText(forecasts[0].period)).toBeDefined();
     expect(getAllByText(forecasts[1].period)).toBeDefined();
     expect(getAllByText(forecasts[2].period)).toBeDefined();

@@ -16,7 +16,8 @@ const CurrentWeather = ({ person, weather }) => {
         <StyledWeather style={props}>
           <WeatherImage weather={weather.type} />
           <h1 className="font-playfair">{person.name}</h1>
-          <h2 className="font-playfair">{weather.temperature.toFixed(0)}°F</h2>
+          <h2>{weather.type}</h2>
+          <h3 className="font-playfair">{weather.temperature.toFixed(0)}°F</h3>
         </StyledWeather>
       )}
     </Spring>
@@ -33,13 +34,18 @@ const StyledWeather = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  justify-content: center;
   text-align: center;
   width: 60%;
 
-  img {
-    border-radius: 0.35rem;
-    max-width: 20rem;
-    width: 100%;
+  svg {
+    margin-bottom: 1rem;
+  }
+
+  h2,
+  h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 `;
 
