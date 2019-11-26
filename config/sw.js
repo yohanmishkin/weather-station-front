@@ -6,13 +6,13 @@ workbox.routing.registerRoute(
   })
 );
 
-// // Google web fonts
-// workbox.routing.registerRoute(
-//   /^https:\/\/fonts\.googleapis\.com/,
-//   new workbox.strategies.StaleWhileRevalidate({
-//     cacheName: 'google-fonts-stylesheets'
-//   })
-// );
+// Google web fonts
+workbox.routing.registerRoute(
+  /^https:\/\/fonts\.googleapis\.com/,
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'google-fonts-stylesheets'
+  })
+);
 
 // // Images
 // workbox.routing.registerRoute(
