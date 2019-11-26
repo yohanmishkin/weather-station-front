@@ -31,8 +31,10 @@ const PersonContainer = props => {
         forecastsFetch
       ]);
 
-      let weatherJson = await weatherResponse.json();
-      let forecastsJson = await forecastResponse.json();
+      let [weatherJson, forecastsJson] = await Promise.all([
+        weatherResponse.json(),
+        forecastResponse.json()
+      ]);
 
       if (!isCancelled) {
         setPerson(personJson);

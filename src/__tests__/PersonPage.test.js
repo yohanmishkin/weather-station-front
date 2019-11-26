@@ -58,7 +58,7 @@ describe('weather station', () => {
     expect(getByText('Back to people').getAttribute('href')).toBe('/');
   });
 
-  it('it shows loading spinner while waiting for weather to load', () => {
+  it('it shows loading spinner while waiting for weather to load', async () => {
     const person = server.create('person');
 
     const { queryByTestId } = render(
@@ -70,7 +70,7 @@ describe('weather station', () => {
     expect(queryByTestId('weather-loading')).toBeInTheDocument();
   });
 
-  it('it shows loading spinner while waiting for forecast to load', () => {
+  it('it shows loading spinner while waiting for forecast to load', async () => {
     const person = server.create('person');
 
     const { queryByTestId } = render(
