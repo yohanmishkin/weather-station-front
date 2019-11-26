@@ -27,7 +27,7 @@ describe('weather station', () => {
       long: person.long
     });
 
-    const { getByAltText, getByText, getAllByText } = render(
+    const { getByText, getAllByText } = render(
       <MemoryRouter>
         <PersonPage id={person.id} />
       </MemoryRouter>
