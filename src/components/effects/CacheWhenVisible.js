@@ -1,41 +1,78 @@
 import config from '../../config';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const CacheWhenVisible = ({ person, render }) => {
-  const [topOfPersonCard, setTop] = useState(0);
-  const positionRef = useCallback(node => {
-    if (node !== null) {
-      setTop(node.getBoundingClientRect().top);
+  const [isVisible, setIsVisible] = useState(false);
+  const positionRef = useRef(null);
+  const throttle = 50;
+  let throttleCounter = 0;
+
+  const scrollHandler = () => {
+    if (throttleCounter % throttle === 0) {
+      if (positionRef.current) {
+        if (
+          positionRef.current.getBoundingClientRect().top < window.innerHeight
+        ) {
+          console.log(`${person.name} now visible`);
+          setIsVisible(true);
+        }
+      }
     }
+    throttleCounter++;
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollHandler);
+
+    return function cleanUp() {
+      window.removeEventListener('scroll', scrollHandler);
+    };
   });
 
-  if (window.caches) {
-    useEffect(() => {
-      let isCancelled = false;
+  useEffect(() => {
+    let isCancelled = false;
 
-      const cacheWeatherAndForecast = async () => {
-        if (!isCancelled) {
-          const cache = await window.caches.open('weather-station-forecasts');
-          cache.addAll([
-            `${config.apiUrl}/api/weather?lat=${person.lat}&long=${person.long}`,
-            `${config.apiUrl}/api/forecast?lat=${person.lat}&long=${person.long}`
-          ]);
+    if (isVisible) {
+      console.log(`Caching weather for ${person.name}`);
+      cacheWeatherAndForecast(isCancelled);
+    }
+
+    return function cleanUp() {
+      isCancelled = true;
+    };
+  }, [isVisible]);
+
+  const cacheWeatherAndForecast = async isCancelled => {
+    if (!isCancelled) {
+      const cache = await window.caches.open('weather-station-forecasts');
+
+      const weatherUrl = `${config.apiUrl}/api/weather?lat=${person.lat}&long=${person.long}`;
+      const forecastUrl = `${config.apiUrl}/api/forecast?lat=${person.lat}&long=${person.long}`;
+
+      const [
+        cachedWeatherRequests,
+        cachedForecastRequests
+      ] = await Promise.all([
+        cache.matchAll(weatherUrl),
+        cache.matchAll(forecastUrl)
+      ]);
+
+      if (
+        cachedWeatherRequests.length === 0 &&
+        cachedForecastRequests.length === 0
+      ) {
+        try {
+          await cache.addAll([weatherUrl, forecastUrl]);
+          console.log(`Filled cache for ${person.name}`);
+        } catch (e) {
+          console.log(`Unable to fill cache for ${person.name}`);
         }
-      };
-
-      window.addEventListener('scroll', () => {
-        let isVisible = topOfPersonCard < window.innerHeight;
-        if (isVisible) {
-          cacheWeatherAndForecast();
-        }
-      });
-
-      return function cleanUp() {
-        isCancelled = true;
-      };
-    }, [top]);
-  }
+      } else {
+        console.log(`Cache already filled for ${person.name}`);
+      }
+    }
+  };
 
   return <div ref={positionRef}>{render(person)}</div>;
 };

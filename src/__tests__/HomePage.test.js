@@ -1,7 +1,12 @@
 import '@testing-library/jest-dom/extend-expect';
 import HomePage from '../components/pages/HomePage';
 import { makeServer } from '../server';
-import { fireEvent, render, waitForDomChange } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  wait,
+  waitForDomChange
+} from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import seedrandom from 'seedrandom';
@@ -74,12 +79,14 @@ describe('Home page', () => {
   it('weather & forecast requests are cached for people', async () => {
     let person = server.create('person');
 
-    const addAllMock = jest.fn();
+    const addAll = jest.fn();
+    const matchAll = jest.fn(() => []);
 
-    await renderWithMockedCache(addAllMock);
+    await renderWithMockedCache(addAll, matchAll);
     await fireEvent.scroll(window);
+    await wait(() => isScrolledToBottom);
 
-    expect(addAllMock).toHaveBeenCalledWith([
+    expect(addAll).toHaveBeenCalledWith([
       `/api/weather?lat=${person.lat}&long=${person.long}`,
       `/api/forecast?lat=${person.lat}&long=${person.long}`
     ]);
@@ -89,30 +96,55 @@ describe('Home page', () => {
     server.createList('person', 30);
 
     const cachedRequests = [];
-    const addAllMock = jest.fn(requests => cachedRequests.push(requests));
+    const addAll = jest.fn(requests => cachedRequests.push(requests));
+    const matchAll = jest.fn(() => []);
 
-    await renderWithMockedCache(addAllMock);
+    await renderWithMockedCache(addAll, matchAll);
 
-    expect(cachedRequests.length).not.toBe(30);
+    expect(cachedRequests.length).toBe(0);
 
     await fireEvent.scroll(window);
+    await wait(() => isScrolledToBottom);
 
     expect(cachedRequests.length).toBe(30);
   });
 
-  const renderWithMockedCache = async addAllMock => {
-    const openMock = jest
-      .fn()
-      .mockImplementation(() => ({ addAll: addAllMock }));
+  it('does not cache requests that have already been cached', async () => {
+    server.create('person');
+
+    const cachedRequests = Array(1);
+    const addAll = jest.fn();
+    const matchAll = jest.fn(() => Promise.resolve(cachedRequests));
+
+    await renderWithMockedCache(addAll, matchAll);
+    await fireEvent.scroll(window);
+
+    expect(matchAll).toHaveBeenCalledTimes(2);
+
+    await fireEvent.scroll(window);
+
+    expect(addAll).toHaveBeenCalledTimes(0);
+  });
+
+  const renderWithMockedCache = async function(addAllMock, matchAllMock) {
+    const openMock = jest.fn().mockImplementation(() => ({
+      addAll: addAllMock,
+      matchAll: matchAllMock
+    }));
 
     global.window.caches = { open: openMock };
 
-    render(
+    const { container } = render(
       <MemoryRouter>
         <HomePage />
       </MemoryRouter>
     );
 
     await waitForDomChange();
+
+    return container;
   };
+
+  const isScrolledToBottom =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight;
 });
