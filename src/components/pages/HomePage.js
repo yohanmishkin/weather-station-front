@@ -24,6 +24,7 @@ export default function() {
 
 const Layout = styled.div`
   h1 {
+    margin-top: 2rem;
     text-align: center;
     @media (min-width: 750px) {
       margin-right: 3rem;
