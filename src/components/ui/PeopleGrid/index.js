@@ -1,6 +1,6 @@
 import PersonCard from '../PersonCard';
 import PropTypes from 'prop-types';
-import CacheWhenVisible from '../../effects/CacheWhenVisible';
+import VisibilityDetector from '../../effects/VisibilityDetector';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -10,10 +10,9 @@ const PeopleGrid = ({ people }) => {
       <GridRow>
         {people.map((person, index) => (
           <GridItem key={index} data-testid={`person-card-${index}`}>
-            <CacheWhenVisible
-              person={person}
-              render={person => <PersonCard person={person} />}
-            />
+            <VisibilityDetector>
+              <PersonCard person={person} />
+            </VisibilityDetector>
           </GridItem>
         ))}
       </GridRow>
