@@ -25,6 +25,14 @@ workbox.routing.registerRoute(
   })
 );
 
+workbox.routing.registerRoute(
+  new RegExp('https://api.weatherstation.xyz/api/.*'),
+  new workbox.strategies.CacheFirst({
+    cacheableResponse: { statuses: [0, 200] },
+    cacheName: 'weather-station-api'
+  })
+);
+
 // // Images
 // workbox.routing.registerRoute(
 //   /\.(?:png|gif|jpg|jpeg|webp|svg)$/,
