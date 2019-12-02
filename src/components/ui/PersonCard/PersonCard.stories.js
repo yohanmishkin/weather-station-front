@@ -11,6 +11,18 @@ const charles = {
   temperature: 58
 };
 
-export const basic = () => <PersonCard person={charles} />;
+const withConstrainedWidth = (WrappedComponent, ...props) => {
+  return () => (
+    <div style={{ width: '400px' }}>
+      <WrappedComponent {...props} />
+    </div>
+  );
+};
 
-export const cached = () => <PersonCard cached={true} person={charles} />;
+export const basic = withConstrainedWidth(() => (
+  <PersonCard person={charles} />
+));
+
+export const cached = withConstrainedWidth(() => (
+  <PersonCard cached={true} person={charles} />
+));
