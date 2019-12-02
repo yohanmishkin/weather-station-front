@@ -17,6 +17,7 @@
   - cache results for 10 hours
 
 - context
+  - person urls (person, weather, forecast)
 - reconciliation
 - 3rd party
 
