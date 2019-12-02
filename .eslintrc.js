@@ -11,8 +11,23 @@ module.exports = {
     'prettier',
     'plugin:jest/recommended',
     'plugin:prettier/recommended',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
   ],
+  plugins: ['jest', 'prettier', 'react', 'react-hooks'],
+  rules: {
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    'react/display-name': ['off'],
+    'react-hooks/rules-of-hooks': ['error'],
+     "no-unused-vars": [
+      "error",
+      {
+        varsIgnorePattern: "React"
+      }
+    ]
+  },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
@@ -23,14 +38,6 @@ module.exports = {
     },
     ecmaVersion: 2018,
     sourceType: 'module'
-  },
-  plugins: ['jest', 'prettier', 'react'],
-  rules: {
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
-    'react/display-name': ['off']
   },
   settings: {
     react: {
