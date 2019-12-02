@@ -12,11 +12,11 @@
   - don't prompt pwa users
 
 - offline ?? data caching ??
-  - progressively cache forecasts as you scroll
+  + progressively cache forecasts as you scroll
   - alert uncached when offline
+  - cache results for 10 hours
 
 - context
-- ref
 - reconciliation
 - 3rd party
 

@@ -1,22 +1,27 @@
 import PersonCard from '../PersonCard';
 import PropTypes from 'prop-types';
+import PersonCache from '../../effects/PersonCache';
 import VisibilityDetector from '../../effects/VisibilityDetector';
 import React from 'react';
 import styled from 'styled-components';
 
 const PeopleGrid = ({ people }) => {
   return (
-    <Container>
+    <Layout>
       <GridRow>
         {people.map((person, index) => (
           <GridItem key={index} data-testid={`person-card-${index}`}>
-            <VisibilityDetector>
-              <PersonCard person={person} />
-            </VisibilityDetector>
+            <PersonCache person={person}>
+              {({ cacheRequests }) => (
+                <VisibilityDetector onShown={cacheRequests}>
+                  <PersonCard person={person} />
+                </VisibilityDetector>
+              )}
+            </PersonCache>
           </GridItem>
         ))}
       </GridRow>
-    </Container>
+    </Layout>
   );
 };
 
@@ -24,7 +29,7 @@ PeopleGrid.propTypes = {
   people: PropTypes.array.isRequired
 };
 
-const Container = styled.div`
+const Layout = styled.div`
   margin: 0 auto;
 `;
 
