@@ -1,18 +1,33 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CheckMark from './icon-check-grape.svg';
 import styled from 'styled-components';
 
-const PersonCard = ({ person }) => {
+const PersonCard = ({ cached, person }) => {
   return (
     <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
-      <img alt={`${person.name}'s headshot`} src={person.imageUrl} />
+      {cached ? (
+        <img
+          alt={`${person.name}'s weather is cached`}
+          className="is-cached"
+          src={CheckMark}
+        />
+      ) : (
+        <></>
+      )}
+      <img
+        alt={`${person.name}'s headshot`}
+        className="headshot"
+        src={person.imageUrl}
+      />
       <h2 className="font-playfair">{person.name}</h2>
     </StyledLink>
   );
 };
 
 PersonCard.propTypes = {
+  cached: PropTypes.bool,
   person: PropTypes.object.isRequired
 };
 
@@ -22,6 +37,7 @@ const StyledLink = styled(Link)`
   display: block;
   margin-bottom: 1rem;
   padding: 2rem;
+  position: relative;
   text-align: center;
   text-decoration: none;
   transition: all 0.5s;
@@ -31,9 +47,15 @@ const StyledLink = styled(Link)`
     color: #675baa;
   }
 
-  img {
+  .headshot {
     border-radius: 0.35rem;
     width: 100%;
+  }
+
+  .is-cached {
+    position: absolute;
+    bottom: 75px;
+    right: 20px;
   }
 `;
 

@@ -20,6 +20,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   new RegExp('http://localhost:4000/api/.*'),
   new workbox.strategies.CacheFirst({
+    cacheableResponse: { statuses: [0, 200] },
     cacheName: 'weather-station-api'
   })
 );

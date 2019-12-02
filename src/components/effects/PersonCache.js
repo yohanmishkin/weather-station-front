@@ -1,8 +1,10 @@
 import config from '../../config';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 
 const PersonCache = props => {
+  const [alreadyCached, setAlreadyCached] = useState(false);
+
   const cacheWeatherAndForecast = async () => {
     console.log(`WeatherStation: Filling cache for ${props.person.name}`);
     const cache = await window.caches.open('weather-station-api');
@@ -28,6 +30,7 @@ const PersonCache = props => {
     ) {
       try {
         await cache.addAll([forecastUrl, personUrl, weatherUrl]);
+        setAlreadyCached(true);
         console.log(`WeatherStation: Filled cache for ${props.person.name}`);
       } catch (e) {
         console.log(
@@ -38,10 +41,14 @@ const PersonCache = props => {
       console.log(
         `WeatherStation: Cache already filled for ${props.person.name}`
       );
+      setAlreadyCached(true);
     }
   };
 
-  return props.children({ cacheRequests: cacheWeatherAndForecast });
+  return props.children({
+    alreadyCached,
+    cachePerson: cacheWeatherAndForecast
+  });
 };
 
 PersonCache.propTypes = {
