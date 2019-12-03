@@ -12,7 +12,7 @@ const PersonCard = ({ cached, person }) => {
         <Spring
           from={{ transform: 'scale(0.1)' }}
           to={{ transform: 'scale(1)' }}
-          config={{ mass: 3, tension: 350, friction: 40 }}
+          config={{ mass: 2, tension: 400, friction: 18 }}
         >
           {props => (
             <img
