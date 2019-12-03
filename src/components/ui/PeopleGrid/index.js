@@ -10,10 +10,7 @@ const PeopleGrid = ({ people }) => {
     <Layout>
       <GridRow>
         {people.map((person, index) => (
-          <GridItem
-            key={`${person.id}-${index}`}
-            data-testid={`person-card-${index}`}
-          >
+          <GridItem key={person.id} data-testid={`person-card-${index}`}>
             <PersonCache person={person}>
               {({ alreadyCached, cachePerson }) => (
                 <VisibilityDetector onShown={cachePerson}>
