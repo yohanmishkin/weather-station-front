@@ -15,6 +15,8 @@
   + progressively cache forecasts as you scroll
   - alert uncached when offline
   - cache results for 10 hours
+  - stop fetching when offline
+  - move cached to top when offline
 
 - context
   - person urls (person, weather, forecast)
@@ -24,7 +26,8 @@
 - style
   - slide in forecasts | desktop
   - slide up forecasts | mobile
-  - 
+  - clamp forecast descriptions with tooltip
+
 - animations from reactconf video
 - <Curve />
 - Loading spinner

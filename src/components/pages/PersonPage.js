@@ -1,5 +1,6 @@
 import PersonContainer from '../effects/PersonContainer';
 import CurrentWeather from '../ui/CurrentWeather';
+import Waves from '../ui/Waves';
 import Forecast from '../ui/Forecast';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,7 @@ const PersonPage = ({ id }) => {
             weather={weather}
           />
           <Forecast isLoading={isLoading} forecasts={forecasts} />
+          <Waves />
         </Layout>
       )}
     </PersonContainer>
@@ -56,8 +58,3 @@ const Layout = styled.div`
 `;
 
 export default PersonPage;
-
-// <Curve>
-//   <div className="wave-one"></div>
-//   <div className="wave-two"></div>
-// </Curve>
