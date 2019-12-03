@@ -12,7 +12,7 @@ const PersonCard = ({ cached, person }) => {
         <Spring
           from={{ transform: 'scale(0.1)' }}
           to={{ transform: 'scale(1)' }}
-          config={{ mass: 2, tension: 400, friction: 18 }}
+          config={{ mass: 1, tension: 400, friction: 18 }}
         >
           {props => (
             <img
@@ -62,8 +62,8 @@ const StyledLink = styled(Link)`
 
   .is-cached {
     position: absolute;
-    bottom: 75px;
-    right: 20px;
+    bottom: 4.6875rem;
+    right: 1.25rem;
   }
 `;
 
