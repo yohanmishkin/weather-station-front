@@ -1,6 +1,14 @@
 /* eslint-disable no-undef */
 
-// Statics
+// Global
+workbox.core.skipWaiting();
+workbox.core.clientsClaim();
+
+// Precache
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+
+// Routes
+// > Statics
 workbox.routing.registerRoute(
   /\.(?:js|css|html|ico)$/,
   new workbox.strategies.StaleWhileRevalidate({
@@ -8,7 +16,7 @@ workbox.routing.registerRoute(
   })
 );
 
-// Google web fonts
+// > Google web fonts
 workbox.routing.registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
   new workbox.strategies.StaleWhileRevalidate({
@@ -16,7 +24,8 @@ workbox.routing.registerRoute(
   })
 );
 
-// API responses
+// > API responses
+// > > local development
 workbox.routing.registerRoute(
   new RegExp('http://localhost:4000/api/.*'),
   new workbox.strategies.CacheFirst({
@@ -25,6 +34,7 @@ workbox.routing.registerRoute(
   })
 );
 
+// > > production
 workbox.routing.registerRoute(
   new RegExp('https://api.weatherstation.xyz/api/.*'),
   new workbox.strategies.CacheFirst({
@@ -32,12 +42,6 @@ workbox.routing.registerRoute(
     cacheName: 'weather-station-api'
   })
 );
-
-addEventListener('message', event => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    skipWaiting();
-  }
-});
 
 // // Images
 // workbox.routing.registerRoute(
