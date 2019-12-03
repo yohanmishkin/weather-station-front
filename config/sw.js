@@ -33,6 +33,12 @@ workbox.routing.registerRoute(
   })
 );
 
+addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    skipWaiting();
+  }
+});
+
 // // Images
 // workbox.routing.registerRoute(
 //   /\.(?:png|gif|jpg|jpeg|webp|svg)$/,
