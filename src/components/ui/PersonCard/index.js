@@ -1,29 +1,13 @@
-import CheckMark from './icon-check-grape.svg';
+import AnimatedCheckMark from './AnimatedCheckMark';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Spring } from 'react-spring/renderprops.cjs';
 import styled from 'styled-components';
 
 const PersonCard = ({ cached, person }) => {
   return (
     <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
-      {cached ? (
-        <Spring
-          from={{ transform: 'scale(0.1)' }}
-          to={{ transform: 'scale(1)' }}
-          config={{ mass: 1, tension: 400, friction: 18 }}
-        >
-          {props => (
-            <img
-              alt={`${person.name}'s weather is cached`}
-              className="is-cached"
-              src={CheckMark}
-              style={props}
-            />
-          )}
-        </Spring>
-      ) : null}
+      {cached ? <AnimatedCheckMark /> : null}
       <img
         alt={`${person.name}'s headshot`}
         className="headshot"
