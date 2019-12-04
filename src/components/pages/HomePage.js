@@ -3,6 +3,7 @@ import PeopleContainer from '../effects/PeopleContainer';
 import RandomizedList from '../effects/RandomizedList';
 import Header from '../ui/Header';
 import PeopleGrid from '../ui/PeopleGrid';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 const HomePage = () => {
@@ -35,6 +36,10 @@ const Container = ({ children }) => {
       {children}
     </CacheCount.Provider>
   );
+};
+
+Container.propTypes = {
+  children: PropTypes.element.isRequired
 };
 
 export default HomePage;

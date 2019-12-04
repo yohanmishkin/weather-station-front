@@ -6,7 +6,7 @@ import { Spring } from 'react-spring/renderprops.cjs';
 const AnimatedLogo = () => {
   return (
     <Spring
-      from={{ transform: 'scale(0.1)' }}
+      from={{ transform: 'scale(0)' }}
       to={{ transform: 'scale(1)' }}
       config={{ mass: 1.5, tension: 1000, friction: 30 }}
     >
