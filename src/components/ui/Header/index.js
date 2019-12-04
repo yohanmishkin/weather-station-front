@@ -25,17 +25,22 @@ const Header = () => {
 };
 
 const StyledHeader = styled.header`
+  align-items: center;
+  background: #fff1e8;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 
   h1 {
     margin-right: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     text-align: center;
 
     @media (min-width: 750px) {
       margin-right: 3rem;
+      margin-top: 2rem;
       text-align: right;
     }
   }

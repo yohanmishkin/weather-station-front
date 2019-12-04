@@ -30,7 +30,9 @@ PeopleGrid.propTypes = {
 };
 
 const Layout = styled.div`
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3.5rem;
 `;
 
 const GridRow = styled.div`
