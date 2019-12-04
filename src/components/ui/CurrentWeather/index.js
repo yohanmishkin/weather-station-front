@@ -36,7 +36,6 @@ const StyledWeather = styled.div`
   flex-grow: 1;
   justify-content: center;
   text-align: center;
-  width: 60%;
 
   svg {
     margin-bottom: 1rem;
