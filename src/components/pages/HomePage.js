@@ -1,13 +1,13 @@
 import PeopleContainer from '../effects/PeopleContainer';
 import RandomizedList from '../effects/RandomizedList';
+import Header from '../ui/Header';
 import PeopleGrid from '../ui/PeopleGrid';
 import React from 'react';
-import styled from 'styled-components';
 
 export default function() {
   return (
-    <Layout>
-      <h1 className="font-playfair">WeatherStation</h1>
+    <div>
+      <Header />
 
       <PeopleContainer>
         {({ people }) => (
@@ -18,17 +18,6 @@ export default function() {
           </RandomizedList>
         )}
       </PeopleContainer>
-    </Layout>
+    </div>
   );
 }
-
-const Layout = styled.div`
-  h1 {
-    margin-top: 2rem;
-    text-align: center;
-    @media (min-width: 750px) {
-      margin-right: 3rem;
-      text-align: right;
-    }
-  }
-`;

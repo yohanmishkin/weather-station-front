@@ -7,6 +7,10 @@
 - render props
 - random order people
 
+- stop caching after failed requests 
+- grey out people with failed cache
+- show number of cached people
+
 - install to home screen
   - prompt user to install
   - don't prompt pwa users
