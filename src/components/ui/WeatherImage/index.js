@@ -44,13 +44,21 @@ const typesOfWeather = {
 };
 
 const WeatherImage = ({ weather }) => {
+  if (weather === 'unknown') {
+    return <span>❔</span>;
+  }
+
   let closestMatch = levenshteinWeather(weather, Object.keys(typesOfWeather));
   let ApproximateWeather = typesOfWeather[closestMatch];
   return <ApproximateWeather data-testid={`${closestMatch}-svg`} />;
 };
 
 WeatherImage.propTypes = {
-  weather: PropTypes.string.isRequired
+  weather: PropTypes.string
+};
+
+WeatherImage.defaultProps = {
+  weather: 'unknown'
 };
 
 export default WeatherImage;

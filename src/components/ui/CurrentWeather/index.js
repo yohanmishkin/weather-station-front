@@ -17,7 +17,11 @@ const CurrentWeather = ({ person, weather }) => {
           <WeatherImage weather={weather.type} />
           <h1 className="font-playfair">{person.name}</h1>
           <h2>{weather.type}</h2>
-          <h3 className="font-playfair">{weather.temperature.toFixed(0)}°F</h3>
+          {weather.temperature ? (
+            <h3 className="font-playfair">
+              {weather.temperature.toFixed(0)}°F
+            </h3>
+          ) : null}
         </StyledWeather>
       )}
     </Spring>

@@ -9,11 +9,15 @@ const PeopleContainer = props => {
     let isCancelled = false;
 
     const fetchPeople = async () => {
-      let response = await fetch(`${config.apiUrl}/api/people`);
-      let json = await response.json();
+      try {
+        let response = await fetch(`${config.apiUrl}/api/people`);
+        let json = await response.json();
 
-      if (!isCancelled) {
-        setPeople(json);
+        if (!isCancelled) {
+          setPeople(json);
+        }
+      } catch (e) {
+        console.log(e);
       }
     };
 

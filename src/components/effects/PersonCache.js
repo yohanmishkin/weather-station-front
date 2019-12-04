@@ -10,76 +10,78 @@ const PersonCache = props => {
   const personUrl = `${config.apiUrl}/api/people/${props.person.id}`;
   const weatherUrl = `${config.apiUrl}/api/weather?lat=${props.person.lat}&long=${props.person.long}`;
 
-  useEffect(() => {
-    let isCancelled = false;
+  if (window.caches) {
+    useEffect(() => {
+      let isCancelled = false;
 
-    const checkPersonCache = async () => {
-      if (!isCancelled) {
-        const cache = await window.caches.open('weather-station-api');
+      const checkPersonCache = async () => {
+        if (!isCancelled) {
+          const cache = await window.caches.open('weather-station-api');
 
-        const cachedPersonRequests = await cache.matchAll(personUrl);
+          const cachedPersonRequests = await cache.matchAll(personUrl);
 
-        if (cachedPersonRequests.length === 0) {
-          setIsPersonCached(false);
-        } else {
-          console.log(
-            `WeatherStation: Person cache already filled for ${props.person.name}`
-          );
-          setIsPersonCached(true);
+          if (cachedPersonRequests.length === 0) {
+            setIsPersonCached(false);
+          } else {
+            console.log(
+              `WeatherStation: Person cache already filled for ${props.person.name}`
+            );
+            setIsPersonCached(true);
+          }
         }
-      }
-    };
+      };
 
-    checkPersonCache();
+      checkPersonCache();
 
-    return function cleanUp() {
-      isCancelled = true;
-    };
-  }, []);
+      return function cleanUp() {
+        isCancelled = true;
+      };
+    }, []);
 
-  useEffect(() => {
-    let isCancelled = false;
+    useEffect(() => {
+      let isCancelled = false;
 
-    const checkWeatherCache = async () => {
-      if (!isCancelled) {
-        const cache = await window.caches.open('weather-station-api');
+      const checkWeatherCache = async () => {
+        if (!isCancelled) {
+          const cache = await window.caches.open('weather-station-api');
 
-        const [
-          cachedForecastRequests,
-          cachedWeatherRequests
-        ] = await Promise.all([
-          cache.matchAll(forecastUrl),
-          cache.matchAll(weatherUrl)
-        ]);
+          const [
+            cachedForecastRequests,
+            cachedWeatherRequests
+          ] = await Promise.all([
+            cache.matchAll(forecastUrl),
+            cache.matchAll(weatherUrl)
+          ]);
 
-        if (
-          cachedForecastRequests.length === 0 &&
-          cachedWeatherRequests.length === 0
-        ) {
-          setIsWeatherCached(false);
-        } else {
-          console.log(
-            `WeatherStation: Weather cache already filled for ${props.person.lat},${props.person.long}`
-          );
-          setIsWeatherCached(true);
+          if (
+            cachedForecastRequests.length === 0 &&
+            cachedWeatherRequests.length === 0
+          ) {
+            setIsWeatherCached(false);
+          } else {
+            console.log(
+              `WeatherStation: Weather cache already filled for ${props.person.lat},${props.person.long}`
+            );
+            setIsWeatherCached(true);
+          }
         }
+      };
+
+      checkWeatherCache();
+
+      return function cleanUp() {
+        isCancelled = true;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (isPersonCached && isWeatherCached) {
+        setAlreadyCached(true);
+      } else {
+        setAlreadyCached(false);
       }
-    };
-
-    checkWeatherCache();
-
-    return function cleanUp() {
-      isCancelled = true;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isPersonCached && isWeatherCached) {
-      setAlreadyCached(true);
-    } else {
-      setAlreadyCached(false);
-    }
-  }, [isPersonCached, isWeatherCached]);
+    }, [isPersonCached, isWeatherCached]);
+  }
 
   const fillCache = async () => {
     if (!alreadyCached) {

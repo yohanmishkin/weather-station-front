@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { Keyframes } from 'react-spring/renderprops';
+import { Keyframes } from 'react-spring/renderprops.cjs';
 
 const Layout = styled.div`
   bottom: 0;

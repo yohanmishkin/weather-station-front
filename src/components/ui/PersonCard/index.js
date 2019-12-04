@@ -2,7 +2,7 @@ import CheckMark from './icon-check-grape.svg';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Spring } from 'react-spring/renderprops';
+import { Spring } from 'react-spring/renderprops.cjs';
 import styled from 'styled-components';
 
 const PersonCard = ({ cached, person }) => {

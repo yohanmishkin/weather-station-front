@@ -12,35 +12,39 @@ const PersonContainer = props => {
     let isCancelled = false;
 
     const fetchData = async () => {
-      let personResponse = await fetch(
-        `${config.apiUrl}/api/people/${props.id}`
-      );
+      try {
+        let personResponse = await fetch(
+          `${config.apiUrl}/api/people/${props.id}`
+        );
 
-      let personJson = await personResponse.json();
+        let personJson = await personResponse.json();
 
-      let weatherFetch = fetch(
-        `${config.apiUrl}/api/weather?lat=${personJson.lat}&long=${personJson.long}`
-      );
+        let weatherFetch = fetch(
+          `${config.apiUrl}/api/weather?lat=${personJson.lat}&long=${personJson.long}`
+        );
 
-      let forecastsFetch = fetch(
-        `${config.apiUrl}/api/forecast?lat=${personJson.lat}&long=${personJson.long}`
-      );
+        let forecastFetch = fetch(
+          `${config.apiUrl}/api/forecast?lat=${personJson.lat}&long=${personJson.long}`
+        );
 
-      let [weatherResponse, forecastResponse] = await Promise.all([
-        weatherFetch,
-        forecastsFetch
-      ]);
+        let [weatherResponse, forecastResponse] = await Promise.all([
+          weatherFetch,
+          forecastFetch
+        ]);
 
-      let [weatherJson, forecastsJson] = await Promise.all([
-        weatherResponse.json(),
-        forecastResponse.json()
-      ]);
+        let [weatherJson, forecastsJson] = await Promise.all([
+          weatherResponse.json(),
+          forecastResponse.json()
+        ]);
 
-      if (!isCancelled) {
-        setPerson(personJson);
-        setWeather(weatherJson);
-        setForecasts(forecastsJson);
-        setIsLoading(false);
+        if (!isCancelled) {
+          setPerson(personJson);
+          setWeather(weatherJson);
+          setForecasts(forecastsJson);
+          setIsLoading(false);
+        }
+      } catch (e) {
+        console.log(e);
       }
     };
 

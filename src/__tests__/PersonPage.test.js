@@ -1,11 +1,11 @@
+import '@testing-library/jest-dom/extend-expect';
 import PersonPage from '../components/pages/PersonPage';
 import { makeServer } from '../server';
-import '@testing-library/jest-dom/extend-expect';
 import { render, waitForDomChange } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-describe('weather station', () => {
+describe('Person page', () => {
   let server;
 
   beforeEach(() => {
@@ -56,6 +56,7 @@ describe('weather station', () => {
     );
 
     expect(getByText('Back to people').getAttribute('href')).toBe('/');
+    await waitForDomChange();
   });
 
   it('it shows loading spinner while waiting for weather to load', async () => {
@@ -68,6 +69,7 @@ describe('weather station', () => {
     );
 
     expect(queryByTestId('weather-loading')).toBeInTheDocument();
+    await waitForDomChange();
   });
 
   it('it shows loading spinner while waiting for forecast to load', async () => {
@@ -80,5 +82,6 @@ describe('weather station', () => {
     );
 
     expect(queryByTestId('forecast-loading')).toBeInTheDocument();
+    await waitForDomChange();
   });
 });
