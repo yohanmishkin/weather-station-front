@@ -3,6 +3,7 @@ import HomePage from '../components/pages/HomePage';
 import { makeServer } from '../server';
 import {
   fireEvent,
+  queryByTestId,
   render,
   wait,
   waitForDomChange
@@ -76,6 +77,42 @@ describe('Home page', () => {
     expect(getByTestId('person-card-2')).toHaveTextContent(personB.name);
   });
 
+  it('does not cache requests that have already been cached', async () => {
+    server.create('person');
+
+    const cachedRequests = Array(1);
+    const addAll = jest.fn();
+    const matchAll = jest.fn(() => Promise.resolve(cachedRequests));
+
+    await renderWithMockedCache(addAll, matchAll);
+    await fireEvent.scroll(window);
+
+    expect(matchAll).toHaveBeenCalledTimes(3);
+
+    await fireEvent.scroll(window);
+
+    expect(addAll).toHaveBeenCalledTimes(0);
+  });
+
+  it('total count of cached people displayed', async () => {
+    server.create('person');
+
+    const container = await renderWithMockedCache(
+      jest.fn(),
+      jest.fn(() => Promise.resolve([]))
+    );
+
+    expect(
+      queryByTestId(container, 'total-cache-count')
+    ).not.toBeInTheDocument();
+
+    // await fireEvent.scroll(window);
+    await waitForDomChange();
+    await waitForDomChange();
+
+    expect(queryByTestId(container, 'total-cache-count')).toHaveTextContent(1);
+  });
+
   it.skip('weather & forecast requests are cached for people', async () => {
     let person = server.create('person');
 
@@ -107,23 +144,6 @@ describe('Home page', () => {
     await wait(() => isScrolledToBottom);
 
     expect(cachedRequests.length).toBe(30);
-  });
-
-  it('does not cache requests that have already been cached', async () => {
-    server.create('person');
-
-    const cachedRequests = Array(1);
-    const addAll = jest.fn();
-    const matchAll = jest.fn(() => Promise.resolve(cachedRequests));
-
-    await renderWithMockedCache(addAll, matchAll);
-    await fireEvent.scroll(window);
-
-    expect(matchAll).toHaveBeenCalledTimes(3);
-
-    await fireEvent.scroll(window);
-
-    expect(addAll).toHaveBeenCalledTimes(0);
   });
 
   const renderWithMockedCache = async function(addAllMock, matchAllMock) {

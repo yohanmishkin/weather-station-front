@@ -1,14 +1,14 @@
+import CacheCount from '../contexts/CacheCount';
 import PeopleContainer from '../effects/PeopleContainer';
 import RandomizedList from '../effects/RandomizedList';
 import Header from '../ui/Header';
 import PeopleGrid from '../ui/PeopleGrid';
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function() {
+const HomePage = () => {
   return (
-    <div>
+    <Container>
       <Header />
-
       <PeopleContainer>
         {({ people }) => (
           <RandomizedList items={people}>
@@ -18,6 +18,23 @@ export default function() {
           </RandomizedList>
         )}
       </PeopleContainer>
-    </div>
+    </Container>
   );
-}
+};
+
+const Container = ({ children }) => {
+  const [cacheCount, setCacheCount] = useState(0);
+
+  return (
+    <CacheCount.Provider
+      value={{
+        count: cacheCount,
+        incrementCount: () => setCacheCount(oldCount => oldCount + 1)
+      }}
+    >
+      {children}
+    </CacheCount.Provider>
+  );
+};
+
+export default HomePage;

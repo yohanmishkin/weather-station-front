@@ -1,8 +1,10 @@
 import config from '../../config';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import CacheCount from '../contexts/CacheCount';
 
 const PersonCache = props => {
+  const { incrementCount: incrementCacheCount } = useContext(CacheCount);
   const [alreadyCached, setAlreadyCached] = useState(false);
   const [isPersonCached, setIsPersonCached] = useState(false);
   const [isWeatherCached, setIsWeatherCached] = useState(false);
@@ -80,6 +82,7 @@ const PersonCache = props => {
   useEffect(() => {
     if (isPersonCached && isWeatherCached) {
       setAlreadyCached(true);
+      incrementCacheCount();
     } else {
       setAlreadyCached(false);
     }
@@ -95,6 +98,7 @@ const PersonCache = props => {
         await cache.addAll([forecastUrl, personUrl, weatherUrl]);
 
         setAlreadyCached(true);
+        incrementCacheCount();
 
         console.log(`WeatherStation: Filled cache for ${props.person.name}`);
       } catch (e) {
