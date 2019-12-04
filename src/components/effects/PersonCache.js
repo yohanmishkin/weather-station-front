@@ -17,17 +17,21 @@ const PersonCache = props => {
 
     const checkPersonCache = async () => {
       if (!isCancelled) {
-        const cache = await window.caches.open('weather-station-api');
+        try {
+          const cache = await window.caches.open('weather-station-api');
 
-        const cachedPersonRequests = await cache.matchAll(personUrl);
+          const cachedPersonRequests = await cache.matchAll(personUrl);
 
-        if (cachedPersonRequests.length === 0) {
-          setIsPersonCached(false);
-        } else {
-          console.log(
-            `WeatherStation: Person cache already filled for ${props.person.name}`
-          );
-          setIsPersonCached(true);
+          if (cachedPersonRequests.length === 0) {
+            setIsPersonCached(false);
+          } else {
+            console.log(
+              `WeatherStation: Person cache already filled for ${props.person.name}`
+            );
+            setIsPersonCached(true);
+          }
+        } catch (e) {
+          console.log(e);
         }
       }
     };
@@ -46,26 +50,30 @@ const PersonCache = props => {
 
     const checkWeatherCache = async () => {
       if (!isCancelled) {
-        const cache = await window.caches.open('weather-station-api');
+        try {
+          const cache = await window.caches.open('weather-station-api');
 
-        const [
-          cachedForecastRequests,
-          cachedWeatherRequests
-        ] = await Promise.all([
-          cache.matchAll(forecastUrl),
-          cache.matchAll(weatherUrl)
-        ]);
+          const [
+            cachedForecastRequests,
+            cachedWeatherRequests
+          ] = await Promise.all([
+            cache.matchAll(forecastUrl),
+            cache.matchAll(weatherUrl)
+          ]);
 
-        if (
-          cachedForecastRequests.length === 0 &&
-          cachedWeatherRequests.length === 0
-        ) {
-          setIsWeatherCached(false);
-        } else {
-          console.log(
-            `WeatherStation: Weather cache already filled for ${props.person.lat},${props.person.long}`
-          );
-          setIsWeatherCached(true);
+          if (
+            cachedForecastRequests.length === 0 &&
+            cachedWeatherRequests.length === 0
+          ) {
+            setIsWeatherCached(false);
+          } else {
+            console.log(
+              `WeatherStation: Weather cache already filled for ${props.person.lat},${props.person.long}`
+            );
+            setIsWeatherCached(true);
+          }
+        } catch (e) {
+          console.log(e);
         }
       }
     };

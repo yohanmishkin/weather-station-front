@@ -24,23 +24,22 @@ PersonCard.propTypes = {
 };
 
 const StyledLink = styled(Link)`
-  border: transparent solid 0.2rem;
   color: inherit;
   display: block;
-  margin-bottom: 1rem;
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   position: relative;
   text-align: center;
   text-decoration: none;
   transition: all 0.5s;
 
   :hover {
-    border-bottom: solid 0.2rem;
     color: #675baa;
   }
 
   .headshot {
     border-radius: 0.35rem;
+    margin-top: 0.4rem;
     width: 100%;
   }
 
