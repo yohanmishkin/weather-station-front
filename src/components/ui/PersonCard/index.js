@@ -7,12 +7,14 @@ import styled from 'styled-components';
 const PersonCard = ({ cached, person }) => {
   return (
     <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
-      {cached ? <AnimatedCheckMark /> : null}
-      <img
-        alt={`${person.name}'s headshot`}
-        className="headshot"
-        src={person.imageUrl}
-      />
+      <CacheableImageContainer>
+        {cached ? <AnimatedCheckMark /> : null}
+        <img
+          alt={`${person.name}'s headshot`}
+          className="headshot"
+          src={person.imageUrl}
+        />
+      </CacheableImageContainer>
       <h2 className="font-playfair">{person.name}</h2>
     </StyledLink>
   );
@@ -28,7 +30,6 @@ const StyledLink = styled(Link)`
   display: block;
   padding-left: 2rem;
   padding-right: 2rem;
-  position: relative;
   text-align: center;
   text-decoration: none;
   transition: all 0.5s;
@@ -36,6 +37,10 @@ const StyledLink = styled(Link)`
   :hover {
     color: #675baa;
   }
+`;
+
+const CacheableImageContainer = styled.div`
+  position: relative;
 
   .headshot {
     border-radius: 0.35rem;
@@ -45,8 +50,8 @@ const StyledLink = styled(Link)`
 
   .is-cached {
     position: absolute;
-    bottom: 4.6875rem;
-    right: 1.25rem;
+    bottom: -0.45rem;
+    right: -0.75rem;
   }
 `;
 
