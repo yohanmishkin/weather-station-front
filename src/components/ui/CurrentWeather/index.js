@@ -1,30 +1,26 @@
 import WeatherImage from '../WeatherImage';
+import withLoading from '../withLoading';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { config, Spring } from 'react-spring/renderprops.cjs'; // cjs? -> https://github.com/facebook/jest/issues/8186
+import { animated, config, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import withLoading from '../withLoading';
 
 const CurrentWeather = ({ person, weather }) => {
+  const props = useSpring({
+    config: config.stiff,
+    from: { transform: 'translateX(-500px)', opacity: 0 },
+    to: { transform: 'translateX(0)', opacity: 1 }
+  });
+
   return (
-    <Spring
-      config={config.stiff}
-      from={{ transform: 'translateX(-500px)', opacity: 0 }}
-      to={{ transform: 'translateX(0)', opacity: 1 }}
-    >
-      {props => (
-        <StyledWeather style={props}>
-          <WeatherImage weather={weather.type} />
-          <h1 className="font-playfair">{person.name}</h1>
-          <h2>{weather.type}</h2>
-          {weather.temperature ? (
-            <h3 className="font-playfair">
-              {weather.temperature.toFixed(0)}°F
-            </h3>
-          ) : null}
-        </StyledWeather>
-      )}
-    </Spring>
+    <StyledWeather style={props}>
+      <WeatherImage weather={weather.type} />
+      <h1 className="font-playfair">{person.name}</h1>
+      <h2>{weather.type}</h2>
+      {weather.temperature ? (
+        <h3 className="font-playfair">{weather.temperature.toFixed(0)}°F</h3>
+      ) : null}
+    </StyledWeather>
   );
 };
 
@@ -33,7 +29,7 @@ CurrentWeather.propTypes = {
   weather: PropTypes.object.isRequired
 };
 
-const StyledWeather = styled.div`
+const StyledWeather = styled(animated.div)`
   align-items: center;
   display: flex;
   flex-direction: column;

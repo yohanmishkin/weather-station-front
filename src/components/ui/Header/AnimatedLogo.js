@@ -1,18 +1,16 @@
 /* eslint-disable no-constant-condition */
 import Logo from './logo.svg';
 import React from 'react';
-import { Spring } from 'react-spring/renderprops.cjs';
+import { animated, useSpring } from 'react-spring';
 
 const AnimatedLogo = () => {
-  return (
-    <Spring
-      from={{ transform: 'scale(0)' }}
-      to={{ transform: 'scale(1)' }}
-      config={{ mass: 1.5, tension: 1000, friction: 30 }}
-    >
-      {props => <img alt="" src={Logo} style={props} />}
-    </Spring>
-  );
+  const props = useSpring({
+    from: { transform: 'scale(0)' },
+    to: { transform: 'scale(1)' },
+    config: { mass: 1.5, tension: 1000, friction: 30 }
+  });
+
+  return <animated.img alt="" src={Logo} style={props} />;
 };
 
 export default AnimatedLogo;

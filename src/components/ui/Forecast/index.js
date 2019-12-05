@@ -1,29 +1,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { config, Trail } from 'react-spring/renderprops.cjs'; // cjs? -> https://github.com/facebook/jest/issues/8186
+import { animated, config, useTrail } from 'react-spring';
 import styled from 'styled-components';
 import withLoading from '../withLoading';
 
 const Forecast = ({ forecasts }) => {
+  const trail = useTrail(forecasts.length, {
+    from: {
+      transform: 'translateX(80px)',
+      opacity: 0
+    },
+    to: { transform: 'translateX(0px)', opacity: 1 },
+    config: config.stiff
+  });
+
   return (
     <StyledDescriptionList>
-      <Trail
-        config={config.stiff}
-        items={forecasts}
-        keys={item => item.period}
-        from={{
-          transform: 'translateX(80px)',
-          opacity: 0
-        }}
-        to={{ transform: 'translateX(0px)', opacity: 1 }}
-      >
-        {(forecast, index) => props => (
-          <div className="row" key={index} style={props}>
-            <dt>{forecast.period}</dt>
-            <dd>{forecast.shortDescription}</dd>
-          </div>
-        )}
-      </Trail>
+      {trail.map((props, index) => (
+        <animated.div className="row" key={index} style={props}>
+          <dt>{forecasts[index].period}</dt>
+          <dd>{forecasts[index].shortDescription}</dd>
+        </animated.div>
+      ))}
     </StyledDescriptionList>
   );
 };
