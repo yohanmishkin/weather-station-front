@@ -20,13 +20,13 @@ const Header = () => {
       </StyledDiv>
 
       <h1 className="font-playfair">WeatherStation</h1>
+      <FrostedGlass />
     </StyledHeader>
   );
 };
 
 const StyledHeader = styled.header`
   align-items: center;
-  background: #fff1e8;
   display: flex;
   justify-content: space-between;
   position: fixed;
@@ -69,4 +69,12 @@ const StyledDiv = styled.div`
   }
 `;
 
+const FrostedGlass = styled.div`
+  background: #fff1e8;
+  height: 100%;
+  opacity: 0.95;
+  position: absolute;
+  width: 100%;
+  z-index: -10;
+`;
 export default Header;
