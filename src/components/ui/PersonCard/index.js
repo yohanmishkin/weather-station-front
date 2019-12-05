@@ -1,13 +1,24 @@
 import AnimatedCheckMark from './AnimatedCheckMark';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { animated, useSpring } from 'react-spring';
 
 const PersonCard = ({ cached, person }) => {
+  const [hovered, setHovered] = useState(false);
+  const props = useSpring({
+    config: { mass: 1, tension: 500, friction: 25 },
+    transform: hovered ? 'scale(1.01)' : 'scale(1)'
+  });
+
   return (
     <StyledLink to={`/people/${person.id}`} data-testid={`person-${person.id}`}>
-      <CacheableImageContainer>
+      <CacheableImageContainer
+        onMouseOver={() => setHovered(true)}
+        onMouseOut={() => setHovered(false)}
+        style={props}
+      >
         {cached ? <AnimatedCheckMark /> : null}
         <img
           alt={`${person.name}'s headshot`}
@@ -32,14 +43,14 @@ const StyledLink = styled(Link)`
   padding-right: 2rem;
   text-align: center;
   text-decoration: none;
-  transition: all 0.5s;
+  transition: color 0.3s;
 
   :hover {
     color: #675baa;
   }
 `;
 
-const CacheableImageContainer = styled.div`
+const CacheableImageContainer = styled(animated.div)`
   position: relative;
 
   .headshot {
