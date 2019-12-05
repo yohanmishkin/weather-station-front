@@ -11,13 +11,23 @@ const HomePage = () => {
     <Container>
       <Header />
       <PeopleContainer>
-        {({ people }) => (
-          <RandomizedList items={people}>
-            {({ items: randomizedPeople }) => (
-              <PeopleGrid people={randomizedPeople} />
-            )}
-          </RandomizedList>
-        )}
+        {({ isLoading, people }) => {
+          if (isLoading) {
+            return (
+              <span data-testid="loading" style={{ marginTop: '10rem' }}>
+                loading
+              </span>
+            );
+          }
+
+          return (
+            <RandomizedList items={people}>
+              {({ items: randomizedPeople }) => (
+                <PeopleGrid people={randomizedPeople} />
+              )}
+            </RandomizedList>
+          );
+        }}
       </PeopleContainer>
     </Container>
   );

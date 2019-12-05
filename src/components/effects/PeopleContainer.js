@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const PeopleContainer = props => {
   const [people, setPeople] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isCancelled = false;
@@ -15,6 +16,7 @@ const PeopleContainer = props => {
 
         if (!isCancelled) {
           setPeople(json);
+          setIsLoading(false);
         }
       } catch (e) {
         console.log(e);
@@ -28,7 +30,7 @@ const PeopleContainer = props => {
     };
   }, []);
 
-  return props.children({ people });
+  return props.children({ isLoading, people });
 };
 
 PeopleContainer.propTypes = {

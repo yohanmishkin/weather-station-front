@@ -6,7 +6,7 @@ const RandomizedList = props => {
 
   useEffect(() => {
     setShuffledItems(fisherYatesShuffle(props.items));
-  });
+  }, []);
 
   return props.children({ items: shuffledItems });
 };

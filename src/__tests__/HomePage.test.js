@@ -6,7 +6,6 @@ import {
   queryByTestId,
   render,
   wait,
-  waitForElement,
   waitForDomChange
 } from '@testing-library/react';
 import React from 'react';
@@ -22,6 +21,18 @@ describe('Home page', () => {
 
   afterEach(() => {
     server.shutdown();
+  });
+
+  it('displays loading spinner while loading', async () => {
+    server.createList('person', 3);
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+
+    expect(getByTestId('loading')).toBeInTheDocument();
   });
 
   it('displays the weather for multiple people', async () => {
@@ -110,7 +121,6 @@ describe('Home page', () => {
     ).not.toBeInTheDocument();
 
     await fireEvent.scroll(window);
-    // await waitForElement(() => queryByTestId(container, 'total-cache-count'));
     await wait(() => isScrolledToBottom);
 
     expect(queryByTestId(container, 'total-cache-count')).toHaveTextContent(1);
