@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const SourceCodeLinks = props => {
   return (
-    <div>
+    <>
       {props.children}
       <StickyFooter>
         <img height="16" width="16" src={GithubLogo} alt="github logo" />
@@ -14,7 +14,7 @@ const SourceCodeLinks = props => {
         </a>
         <a href="https://github.com/yohanmishkin/weather-station-back">back</a>
       </StickyFooter>
-    </div>
+    </>
   );
 };
 
