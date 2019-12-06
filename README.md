@@ -1,11 +1,4 @@
-- display current weather for multiple people
-- display forecast for given person
-- react router
-- storybook/styled components
 - high order components
-- prop types
-- render props
-- random order people
 
 - stop caching after failed requests 
 - grey out people with failed cache
@@ -16,7 +9,6 @@
   - don't prompt pwa users
 
 - offline ?? data caching ??
-  + progressively cache forecasts as you scroll
   - alert uncached when offline
   - cache results for 10 hours
   - stop fetching when offline
@@ -33,8 +25,6 @@
   - clamp forecast descriptions with tooltip
 
 - animations from reactconf video
-- <Curve />
-- Loading spinner
 - realtime
 
 
