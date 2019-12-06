@@ -14,9 +14,16 @@ const HomePage = () => {
         {({ isLoading, people }) => {
           if (isLoading) {
             return (
-              <span data-testid="loading" style={{ marginTop: '10rem' }}>
-                loading
-              </span>
+              <div
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexGrow: 1,
+                  justifyContent: 'center'
+                }}
+              >
+                <span data-testid="loading">loading</span>
+              </div>
             );
           }
 
