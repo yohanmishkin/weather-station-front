@@ -77,4 +77,5 @@ const FrostedGlass = styled.div`
   width: 100%;
   z-index: -10;
 `;
+
 export default Header;
