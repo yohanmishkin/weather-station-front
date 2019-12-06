@@ -1,6 +1,7 @@
 import CacheCount from '../contexts/CacheCount';
 import PeopleContainer from '../effects/PeopleContainer';
 import RandomizedList from '../effects/RandomizedList';
+import FloatingQuestionMark from '../ui/FloatingQuestionMark';
 import Header from '../ui/Header';
 import PeopleGrid from '../ui/PeopleGrid';
 import PropTypes from 'prop-types';
@@ -36,6 +37,7 @@ const HomePage = () => {
           );
         }}
       </PeopleContainer>
+      <FloatingQuestionMark />
     </Container>
   );
 };
