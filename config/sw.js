@@ -20,7 +20,13 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'google-fonts-stylesheets'
+    cacheName: 'google-fonts-stylesheets',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 182 // 1/2 a year
+      })
+    ]
   })
 );
 
@@ -29,8 +35,16 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   new RegExp('http://localhost:4000/api/.*'),
   new workbox.strategies.CacheFirst({
-    cacheableResponse: { statuses: [0, 200] },
-    cacheName: 'weather-station-api'
+    cacheName: 'weather-station-api',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24 // 1 day
+      }),
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200]
+      })
+    ]
   })
 );
 
@@ -38,8 +52,16 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   new RegExp('https://api.weatherstation.xyz/api/.*'),
   new workbox.strategies.CacheFirst({
-    cacheableResponse: { statuses: [0, 200] },
-    cacheName: 'weather-station-api'
+    cacheName: 'weather-station-api',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24 // 1 day
+      }),
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200]
+      })
+    ]
   })
 );
 
