@@ -1,4 +1,5 @@
 import GithubLogo from './github-64.png';
+import QuestionMark from './question-mark.svg';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,13 +8,19 @@ const SourceCodeLinks = props => {
   return (
     <>
       {props.children}
-      <StickyFooter>
-        <img height="16" width="16" src={GithubLogo} alt="github logo" />
-        <a href="https://github.com/yohanmishkin/weather-station-front">
-          front
-        </a>
-        <a href="https://github.com/yohanmishkin/weather-station-back">back</a>
-      </StickyFooter>
+      <img
+        height="50"
+        width="50"
+        src={QuestionMark}
+        alt=""
+        style={{
+          bottom: 0,
+          right: 0,
+          paddingBottom: '1.5rem',
+          paddingRight: '1.5rem',
+          position: 'fixed'
+        }}
+      />
     </>
   );
 };

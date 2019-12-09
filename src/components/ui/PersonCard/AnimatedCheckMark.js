@@ -1,6 +1,7 @@
-import CheckMark from './icon-check-grape.svg';
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
+
+const checkMarkPath = `${process.env.PUBLIC_URL}/icon-check-grape.svg`;
 
 const AnimatedCheckMark = () => {
   const props = useSpring({
@@ -13,7 +14,7 @@ const AnimatedCheckMark = () => {
     <animated.img
       alt="weather is cached"
       className="is-cached"
-      src={CheckMark}
+      src={checkMarkPath}
       style={props}
     />
   );

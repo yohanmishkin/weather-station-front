@@ -1,4 +1,3 @@
-/* eslint-disable no-constant-condition */
 import Logo from './logo.svg';
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
