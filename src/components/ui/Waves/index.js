@@ -4,6 +4,48 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 import { Keyframes } from 'react-spring/renderprops.cjs';
 
+const Curve = () => {
+  return (
+    <Layout>
+      <WavesContainer>
+        <LoopOne>{props => <WaveOne className="wave" style={props} />}</LoopOne>
+        <LoopTwo>{props => <WaveTwo className="wave" style={props} />}</LoopTwo>
+        <WaveThree className="wave" />
+      </WavesContainer>
+    </Layout>
+  );
+};
+
+const LoopOne = Keyframes.Spring(async next => {
+  while (true) {
+    await next({
+      config: { mass: 5, tension: 35, friction: 100 },
+      from: { transform: 'skewY(-1deg)' },
+      to: { transform: 'skewY(1deg)' }
+    });
+    await next({
+      config: { mass: 5, tension: 35, friction: 100 },
+      from: { transform: 'skewY(1deg)' },
+      to: { transform: 'skewY(-1deg)' }
+    });
+  }
+});
+
+const LoopTwo = Keyframes.Spring(async next => {
+  while (true) {
+    await next({
+      config: { mass: 12, tension: 20, friction: 100 },
+      from: { transform: 'skewY(-10deg)' },
+      to: { transform: 'skewY(2deg)' }
+    });
+    await next({
+      config: { mass: 12, tension: 20, friction: 100 },
+      from: { transform: 'skewY(2deg)' },
+      to: { transform: 'skewY(-10deg)' }
+    });
+  }
+});
+
 const Layout = styled.div`
   bottom: 0;
   position: absolute;
@@ -48,47 +90,5 @@ const WaveThree = styled(animated.div)`
   border-top-right-radius: 90%;
   height: 60%;
 `;
-
-const LoopOne = Keyframes.Spring(async next => {
-  while (true) {
-    await next({
-      config: { mass: 5, tension: 35, friction: 100 },
-      from: { transform: 'skewY(-1deg)' },
-      to: { transform: 'skewY(1deg)' }
-    });
-    await next({
-      config: { mass: 5, tension: 35, friction: 100 },
-      from: { transform: 'skewY(1deg)' },
-      to: { transform: 'skewY(-1deg)' }
-    });
-  }
-});
-
-const LoopTwo = Keyframes.Spring(async next => {
-  while (true) {
-    await next({
-      config: { mass: 12, tension: 20, friction: 100 },
-      from: { transform: 'skewY(-10deg)' },
-      to: { transform: 'skewY(2deg)' }
-    });
-    await next({
-      config: { mass: 12, tension: 20, friction: 100 },
-      from: { transform: 'skewY(2deg)' },
-      to: { transform: 'skewY(-10deg)' }
-    });
-  }
-});
-
-const Curve = () => {
-  return (
-    <Layout>
-      <WavesContainer>
-        <LoopOne>{props => <WaveOne className="wave" style={props} />}</LoopOne>
-        <LoopTwo>{props => <WaveTwo className="wave" style={props} />}</LoopTwo>
-        <WaveThree className="wave" />
-      </WavesContainer>
-    </Layout>
-  );
-};
 
 export default Curve;

@@ -19,7 +19,7 @@ const AboutPage = () => {
           cached for offline use.
         </p>
 
-        <div className="links">
+        <section className="links">
           <p>Source code:</p>
           <ul>
             <li>
@@ -30,6 +30,30 @@ const AboutPage = () => {
             <li>
               <a href="https://github.com/yohanmishkin/weather-station-back">
                 Elixir/Phoenix API
+              </a>
+            </li>
+          </ul>
+
+          <p>Cool components:</p>
+          <ul>
+            <li>
+              <a href="https://github.com/yohanmishkin/weather-station-front/blob/3647ba0e5b56f8e36dd5a245921b6209541cd77e/src/components/ui/WeatherImage/levenshtein-weather.js">
+                Levenshtein weather selection
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/yohanmishkin/weather-station-front/blob/3647ba0e5b56f8e36dd5a245921b6209541cd77e/src/components/effects/RandomizedList.js">
+                Fisher Yates people randomization
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/yohanmishkin/weather-station-front/blob/3647ba0e5b56f8e36dd5a245921b6209541cd77e/src/components/effects/VisibilityDetector.js">
+                Visibility detection
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/yohanmishkin/weather-station-front/blob/master/src/components/ui/Waves/index.js">
+                Animated background waves
               </a>
             </li>
           </ul>
@@ -45,7 +69,7 @@ const AboutPage = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </section>
       </div>
       <Link to="/" data-testid="close">
         <StyledImg height="32" width="32" src={closeImgPath} alt="" />
@@ -62,7 +86,7 @@ const Layout = styled.div`
   flex-direction: column;
   flex-grow: 1;
   font-size: 1.25rem;
-  margin-top: 20%;
+  margin-top: 5%;
   margin-left: 8%;
   margin-right: 8%;
 
@@ -78,7 +102,7 @@ const Layout = styled.div`
   @media (min-width: 750px) {
     margin-left: 29%;
     margin-right: 29%;
-    margin-top: 10%;
+    margin-top: 5%;
   }
 `;
 
