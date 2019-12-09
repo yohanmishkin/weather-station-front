@@ -1,4 +1,4 @@
-import AnimatedLogo from './AnimatedLogo';
+import AnimatedLogo from '../AnimatedLogo';
 import React from 'react';
 import styled from 'styled-components';
 import CacheCount from '../../contexts/CacheCount';

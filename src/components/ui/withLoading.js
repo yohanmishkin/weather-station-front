@@ -6,7 +6,14 @@ export default function withLoading(WrappedComponent, spinnerTestId) {
     const { isLoading, ...passThrough } = props;
 
     if (isLoading) {
-      return <span data-testid={spinnerTestId}>Loading!</span>;
+      return (
+        <span
+          data-testid={spinnerTestId}
+          style={{ marginLeft: 'auto', marginRight: 'auto' }}
+        >
+          loading
+        </span>
+      );
     }
 
     return <WrappedComponent {...passThrough} />;

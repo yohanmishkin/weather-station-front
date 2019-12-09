@@ -41,6 +41,12 @@ const Layout = styled.div`
   a {
     margin-bottom: 2rem;
     margin-top: 1rem;
+    font-size: 1.125rem;
+    color: #000119;
+
+    :hover {
+      color: #675baa;
+    }
   }
 
   @media (min-width: 750px) {
