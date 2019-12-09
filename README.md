@@ -1,34 +1,8 @@
-- high order components
+This project was meant to be a quick and dirty example of some React & PWA learnings.
 
-- stop caching after failed requests 
-- grey out people with failed cache
-- show number of cached people
+Live site: https://weatherstation.xyz/
 
-- install to home screen
-  - prompt user to install
-  - don't prompt pwa users
-
-- offline ?? data caching ??
-  - alert uncached when offline
-  - cache results for 10 hours
-  - stop fetching when offline
-  - move cached to top when offline
-
-- context
-  - person urls (person, weather, forecast)
-- reconciliation
-- 3rd party
-
-- style
-  - slide in forecasts | desktop
-  - slide up forecasts | mobile
-  - clamp forecast descriptions with tooltip
-
-- animations from reactconf video
-- realtime
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+API repo: https://github.com/yohanmishkin/weather-station-back/
 
 ## Available Scripts
 
@@ -96,3 +70,22 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Feature ideas
+- stop caching after failed requests 
+- grey out people with failed cache
+
+- install to home screen
+  - prompt user to install
+  - don't prompt pwa users
+
+- offline ?? data caching ??
+  - alert uncached when offline
+  - stop fetching when offline
+  - move cached to top when offline
+
+- style
+  - clamp forecast descriptions with tooltip
+
+- animations from reactconf video
+- realtime
